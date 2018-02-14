@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 14:34:21 by acottier          #+#    #+#             */
-/*   Updated: 2018/02/10 17:30:02 by acottier         ###   ########.fr       */
+/*   Updated: 2018/02/14 16:55:14 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,28 @@ T					Operand<T>::getValue(void) const
 }
 
 template <typename T>
-IOperand const *	operator+(IOperand const & rhs)
+IOperand const *	Operand<T>::operator+(IOperand const & rhs)
 {
 }
+
+template <typename T>
+IOperand const *	Operand<T>::operator=(Operand const & rhs)
+{
+	_type = rhs.getType();
+	_value = rhs.getValue();
+}
+
+template <typename T>
+std::string	const &	Operand<T>::toString(void) const
+{
+	return (to_string(_value));
+}
+
+template <typename T>
+Operand::Operand(void) {}
+
+template <typename T>
+Operand::Operand(Operand const & src) {}
 
 template class Operand<int8_t>;
 template class Operand<int16_t>;
