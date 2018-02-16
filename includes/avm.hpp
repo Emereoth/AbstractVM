@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 14:44:57 by acottier          #+#    #+#             */
-/*   Updated: 2018/02/10 17:25:29 by acottier         ###   ########.fr       */
+/*   Updated: 2018/02/16 11:02:40 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ bool			checkArgRange(Token * src, int range, std::string * errMsg, std::list<Tok
 
 /* OPERATIONS.CPP */
 
-bool			operationParsing(Operand const & lhs, Operand const & rhs, opType type);
+template <typename T>
+bool			operationParsing(Operand<T> const & lhs, Operand<T> const & rhs, opType type);
 
 #endif

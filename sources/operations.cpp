@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 16:40:24 by acottier          #+#    #+#             */
-/*   Updated: 2018/02/10 17:33:07 by acottier         ###   ########.fr       */
+/*   Updated: 2018/02/16 11:59:58 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ bool			divByZero(Operand<eOperandType> const & rhs, opType type, std::string * e
 {
 	std::stringstream	newMsg;
 
-	if (type == opType::DIV && !rhs.getValue())
+	if (type == opType::DIV && rhs.getValue() == 0)
 	{
 		newMsg << "Error at line " << /*LINE_HERE*/"-1" << ": division by zero" << std::endl;
 		(*errMsg).append(newMsg.str());
@@ -46,10 +46,12 @@ bool			divByZero(Operand<eOperandType> const & rhs, opType type, std::string * e
 	return (true);
 }
 
-bool			operationParsing(Operand const & lhs, Operand const & rhs, opType type)
+template <typename T>
+bool			operationParsing(Operand<T> const & lhs, Operand<T> const & rhs, opType type)
 {
 	std::string			errMsg;
 
+	(void)lhs;
 	if (!checkStack(&errMsg) || !divByZero(rhs, type, &errMsg))
 		throw errMsg;
 	return (true);
