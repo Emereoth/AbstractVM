@@ -46,35 +46,35 @@ IOperand const *	Operand<T>::createOperand(std::string const & value, eOperandTy
 }
 
 template <typename T>
-IOperand	const *	Operand<T>::operator+(Operand<T> const & rhs)
+IOperand	const *	Operand<T>::operator+(IOperand const & rhs)
 {
 	(void)rhs;
 	return (*this);
 }
 
 template <typename T>
-IOperand	const *	Operand<T>::operator-(Operand<T> const & rhs)
+IOperand	const *	Operand<T>::operator-(IOperand const & rhs)
 {
 	(void)rhs;
 	return (*this);
 }
 
 template <typename T>
-IOperand	const *	Operand<T>::operator*(Operand<T> const & rhs)
+IOperand	const *	Operand<T>::operator*(IOperand const & rhs)
 {
 	(void)rhs;
 	return (*this);
 }
 
 template <typename T>
-IOperand	  const *	Operand<T>::operator/(Operand<T> const & rhs)
+IOperand	  const *	Operand<T>::operator/(IOperand const & rhs)
 {
 	(void)rhs;
 	return (*this);
 }
 
 template <typename T>
-IOperand	const *	Operand<T>::operator%(Operand<T> const & rhs)
+IOperand	const *	Operand<T>::operator%(IOperand const & rhs)
 {
 	(void)rhs;
 	return (*this);
@@ -83,7 +83,6 @@ IOperand	const *	Operand<T>::operator%(Operand<T> const & rhs)
 template <typename T>
 IOperand	const *	Operand<T>::operator=(IOperand const & rhs)
 {
-	Operand<T> *		testPtr;
 	_type = rhs.getType();
 	_value = rhs.getValue();
 }
@@ -106,29 +105,29 @@ Operand<T>::Operand(Operand<T> const & src)
 template <typename T>
 IOperand const *	Operand<T>::createInt8(std::string const & value) const
 {
-	return (new Operand<int8_t>((int8_t)atoi(value.c_str()), eOperandType::Int8));
+	return (new Operand<int8_t>(static_cast<int8_t>(atoi(value.c_str())), eOperandType::Int8));
 }
 
 template <typename T>
 IOperand const *	Operand<T>::createInt16(std::string const & value) const
 {
-	return (new Operand<int16_t>((int16_t)atoi(value.c_str()), eOperandType::Int16));
+	return (new Operand<int16_t>(static_cast<int16_t>(atoi(value.c_str())), eOperandType::Int16));
 }
 
 template <typename T>
 IOperand const *	Operand<T>::createInt32(std::string const & value) const
 {
-	return (new Operand<int32_t>((int32_t)atoi(value.c_str()), eOperandType::Int32));
+	return (new Operand<int32_t>(static_cast<int32_t>(atoi(value.c_str())), eOperandType::Int32));
 }
 
 template <typename T>
 IOperand const *	Operand<T>::createFloat(std::string const & value) const
 {
-	return (new Operand<float>((float)atof(value.c_str()), eOperandType::Float));
+	return (new Operand<float>(static_cast<float>(atof(value.c_str())), eOperandType::Float));
 }
 
 template <typename T>
 IOperand const *	Operand<T>::createDouble(std::string const & value) const
 {
-	return (new Operand<double>((double)atof(value.c_str()), eOperandType::Double));
+	return (new Operand<double>(static_cast<double>(atof(value.c_str())), eOperandType::Double));
 }

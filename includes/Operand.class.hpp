@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 18:15:23 by acottier          #+#    #+#             */
-/*   Updated: 2018/02/16 16:32:52 by acottier         ###   ########.fr       */
+/*   Updated: 2018/02/21 15:18:43 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ class Operand : public IOperand
 		T		 				getValue(void) const;
 		IOperand const *		createOperand(std::string const & value, eOperandType type) const;
 
-		IOperand const *		operator+(Operand<T> const & rhs);				
-		IOperand const *		operator-(Operand<T> const & rhs);				
-		IOperand const *		operator*(Operand<T> const & rhs);				
-		IOperand const *		operator/(Operand<T> const & rhs);				
-		IOperand const *		operator%(Operand<T> const & rhs);		
+		virtual IOperand const *		operator+(IOperand const & rhs);				
+		virtual IOperand const *		operator-(IOperand const & rhs);				
+		virtual IOperand const *		operator*(IOperand const & rhs);				
+		virtual IOperand const *		operator/(IOperand const & rhs);				
+		virtual IOperand const *		operator%(IOperand const & rhs);		
 
 		IOperand const *		operator=(IOperand const & rhs);
 		std::string const &		toString(void) const;
