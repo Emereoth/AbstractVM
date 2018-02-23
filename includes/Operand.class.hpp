@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 18:15:23 by acottier          #+#    #+#             */
-/*   Updated: 2018/02/21 15:18:43 by acottier         ###   ########.fr       */
+/*   Updated: 2018/02/23 13:34:49 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,32 +31,32 @@ class Operand : public IOperand
 		Operand(T value, eOperandType type);
 		~Operand(void);
 
-		int 					getPrecision(void) const;
-		eOperandType			getType(void) const;
-		T		 				getValue(void) const;
-		IOperand const *		createOperand(std::string const & value, eOperandType type) const;
+		int 							getPrecision(void) const;
+		eOperandType					getType(void) const;
+		IOperand const *				createOperand(std::string const & value, eOperandType type) const;
 
-		virtual IOperand const *		operator+(IOperand const & rhs);				
-		virtual IOperand const *		operator-(IOperand const & rhs);				
-		virtual IOperand const *		operator*(IOperand const & rhs);				
-		virtual IOperand const *		operator/(IOperand const & rhs);				
-		virtual IOperand const *		operator%(IOperand const & rhs);		
+		virtual Operand<T> const *		operator+(Operand<T> const & rhs);				
+		virtual Operand<T> const *		operator-(Operand<T> const & rhs);				
+		virtual Operand<T> const *		operator*(Operand<T> const & rhs);				
+		virtual Operand<T> const *		operator/(Operand<T> const & rhs);				
+		virtual Operand<T> const *		operator%(Operand<T> const & rhs);		
 
-		IOperand const *		operator=(IOperand const & rhs);
-		std::string const &		toString(void) const;
+		Operand<T> const *				operator=(Operand<T> const & rhs);
+		std::string const &				toString(void) const;
 
+		T								value;
+		
 	private:
 		Operand(void);
 		Operand(Operand const & src);
 
-		IOperand const * 		createInt8( std::string const & value ) const;
-		IOperand const * 		createInt16( std::string const & value ) const;
-		IOperand const * 		createInt32( std::string const & value ) const;
-		IOperand const * 		createFloat( std::string const & value ) const;
-		IOperand const * 		createDouble( std::string const & value ) const;
+		IOperand const * 				createInt8( std::string const & value ) const;
+		IOperand const * 				createInt16( std::string const & value ) const;
+		IOperand const * 				createInt32( std::string const & value ) const;
+		IOperand const * 				createFloat( std::string const & value ) const;
+		IOperand const * 				createDouble( std::string const & value ) const;
 
-		T						_value;
-		eOperandType			_type;
+		eOperandType					_type;
 };
 
 #endif
