@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 16:14:38 by acottier          #+#    #+#             */
-/*   Updated: 2018/02/05 18:13:37 by acottier         ###   ########.fr       */
+/*   Updated: 2018/03/12 11:47:01 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int  		   main(int argc, char **argv)
 			throw tooManyArgs;
 		argc == 2 ? readFile(argv[1], input) : readStdin(input);
 		// for (std::list<Token *>::iterator ii = (input.begin()) ; ii != input.end() ; ii++)
-		// 	(*ii)->showContent();
+			// (*ii)->showContent();
 		synCheck(input);
 		parse(input);
 	}

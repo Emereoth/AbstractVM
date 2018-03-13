@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 16:40:24 by acottier          #+#    #+#             */
-/*   Updated: 2018/02/16 11:59:58 by acottier         ###   ########.fr       */
+/*   Updated: 2018/03/13 15:08:16 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ bool			checkStack(std::string * errMsg)
 	return (true);
 }
 
-bool			divByZero(Operand<eOperandType> const & rhs, opType type, std::string * errMsg)
+template <typename T>
+bool			divByZero(Operand<T> const & rhs, opType type, std::string * errMsg)
 {
 	std::stringstream	newMsg;
 

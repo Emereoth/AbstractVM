@@ -6,7 +6,7 @@
 #    By: acottier <acottier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/13 09:21:32 by acottier          #+#    #+#              #
-#    Updated: 2018/02/08 17:06:07 by acottier         ###   ########.fr        #
+#    Updated: 2018/03/13 15:52:47 by acottier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SRC_NAMES	= 	main.cpp \
 				parser.cpp \
 				argumentParsing.cpp \
 				Operand.template.cpp \
-				operations.cpp
+				operations.cpp \
+				Factory.class.cpp
 
 OBJ_NAMES	= $(SRC_NAMES:.cpp=.o)
 
