@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 18:15:23 by acottier          #+#    #+#             */
-/*   Updated: 2018/03/13 15:52:58 by acottier         ###   ########.fr       */
+/*   Updated: 2018/03/14 15:44:12 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,20 @@ class Operand : public IOperand
 {
 	public:
 		Operand(T value, eOperandType type);
-		~Operand(void);
+		virtual ~Operand(void);
 
-		int 							getPrecision(void) const;
-		eOperandType					getType(void) const;
-		T 								getValue(void) const;
+		virtual int 							getPrecision(void) const;
+		virtual eOperandType					getType(void) const;
+		T 										getValue(void) const;
 
-		IOperand const *				operator+(IOperand const & rhs);				
-		IOperand const *				operator-(IOperand const & rhs);				
-		IOperand const *				operator*(IOperand const & rhs);				
-		IOperand const *				operator/(IOperand const & rhs);				
-		IOperand const *				operator%(IOperand const & rhs);		
+		virtual IOperand const *				operator+(IOperand const & rhs);				
+		virtual IOperand const *				operator-(IOperand const & rhs);				
+		virtual IOperand const *				operator*(IOperand const & rhs);				
+		virtual IOperand const *				operator/(IOperand const & rhs);				
+		virtual IOperand const *				operator%(IOperand const & rhs);		
 
-		IOperand const *				operator=(IOperand const & rhs);
-		std::string const &				toString(void) const;
+		IOperand &								operator=(IOperand const & rhs);
+		virtual std::string const &				toString(void) const;
 
 		
 	private:

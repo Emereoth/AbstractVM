@@ -1,7 +1,7 @@
 // /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Operand.template.cpp                               :+:      :+:    :+:   */
+/*   Operand.class.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -72,7 +72,7 @@ IOperand	const *	Operand<T>::operator%(IOperand const & rhs)
 }
 
 template <typename T>
-IOperand	const *	Operand<T>::operator=(IOperand const & rhs)
+IOperand	&		Operand<T>::operator=(IOperand const & rhs)
 {
 	_type = rhs.getType();
 	_value = static_cast<Operand<T> *>(rhs)->_value;

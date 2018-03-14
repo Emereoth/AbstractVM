@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 14:52:52 by acottier          #+#    #+#             */
-/*   Updated: 2018/03/13 15:37:59 by acottier         ###   ########.fr       */
+/*   Updated: 2018/03/14 15:43:04 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,20 @@ Factory::Factory(Factory const & src)
 
 Factory::~Factory(void) {}
 
-template <typename T>
-IOperand const *		Factory::createOperand(std::string const & value, eOperandType type) const
+IOperand const *	Factory::createOperand(std::string const & value, eOperandType type) const
 {
-	// IOperand const *	(Operand<T>::*f[5])(std::string const &) = {&Operand<T>::createInt8, &Operand<T>::createInt16, 
-	// 						&Operand<T>::createInt32, &Operand<T>::createFloat, &Operand<T>::createDouble};
+	// IOperand const *	(Factory::*f)(std::string const &) = {&Factory::createInt8, &Factory::createInt16, 
+	// 						&Factory::createInt32, &Factory::createFloat, &Factory::createDouble};
 	
 	// return (*f(type)(value));
 	(void)type;
 	return (Factory::createInt8(value));
 }
 
-template <typename T>
 IOperand const *	Factory::createInt8(std::string const & value) const
 {
-	int8_t			castedValue = static_cast<int8_t>(atoi(value.c_str()));
-	Operand<int8_t>	res = new Operand<int8_t>(castedValue, eOperandType::Int8);
+	int8_t				castedValue = static_cast<int8_t>(atoi(value.c_str()));
+	IOperand const * 	res = new Operand<int8_t>(castedValue, eOperandType::Int8);
 
 	return (res);
 }
