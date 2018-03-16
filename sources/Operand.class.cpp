@@ -37,35 +37,35 @@ T					Operand<T>::getValue(void) const
 }
 
 template <typename T>
-IOperand	const *	Operand<T>::operator+(IOperand const & rhs)
+IOperand	const *	Operand<T>::operator+(IOperand const & rhs) const
 {
 	(void)rhs;
 	return (*this);
 }
 
 template <typename T>
-IOperand	const *	Operand<T>::operator-(IOperand const & rhs)
+IOperand	const *	Operand<T>::operator-(IOperand const & rhs) const
 {
 	(void)rhs;
 	return (*this);
 }
 
 template <typename T>
-IOperand	const *	Operand<T>::operator*(IOperand const & rhs)
+IOperand	const *	Operand<T>::operator*(IOperand const & rhs) const
 {
 	(void)rhs;
 	return (*this);
 }
 
 template <typename T>
-IOperand	const *	Operand<T>::operator/(IOperand const & rhs)
+IOperand	const *	Operand<T>::operator/(IOperand const & rhs) const
 {
 	(void)rhs;
 	return (*this);
 }
 
 template <typename T>
-IOperand	const *	Operand<T>::operator%(IOperand const & rhs)
+IOperand	const *	Operand<T>::operator%(IOperand const & rhs) const
 {
 	(void)rhs;
 	return (*this);

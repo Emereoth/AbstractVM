@@ -6,12 +6,11 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 14:52:52 by acottier          #+#    #+#             */
-/*   Updated: 2018/03/14 15:43:04 by acottier         ###   ########.fr       */
+/*   Updated: 2018/03/16 14:43:45 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Factory.class.hpp"
-
 
 Factory::Factory(void) {}
 
