@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 16:14:38 by acottier          #+#    #+#             */
-/*   Updated: 2018/03/12 11:47:01 by acottier         ###   ########.fr       */
+/*   Updated: 2018/03/26 16:06:58 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int  		   main(int argc, char **argv)
 {
     std::list<Token *> 			input;
 	std::string					tooManyArgs = "Too many arguments";
+	Error						errMsg;
 
 	try
 	{
@@ -45,12 +46,12 @@ int  		   main(int argc, char **argv)
 		argc == 2 ? readFile(argv[1], input) : readStdin(input);
 		// for (std::list<Token *>::iterator ii = (input.begin()) ; ii != input.end() ; ii++)
 			// (*ii)->showContent();
-		synCheck(input);
-		parse(input);
+		synCheck(input, errMsg);
+		parse(input, errMsg);
 	}
-	catch (std::string const & message)
+	catch (Error * errMsg)
 	{
-		std::cout << message;
+		std::cout << errMsg->getMsg();
 		return (1);
 	}
     return (0);

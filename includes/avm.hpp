@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 14:44:57 by acottier          #+#    #+#             */
-/*   Updated: 2018/02/16 11:02:40 by acottier         ###   ########.fr       */
+/*   Updated: 2018/03/28 15:00:26 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <iostream>
 #include "Token.class.hpp"
 #include "Operand.class.hpp"
+#include "Error.class.hpp"
 
 /* MAIN.CPP */
 
@@ -31,15 +32,15 @@ void			readStdin(std::list<Token *> & res);
 
 /* LEXER.CPP */
 
-void			synCheck(std::list<Token *> input);
+void			synCheck(std::list<Token *> input, Error & errMsg);
 
 /* PARSER.CPP */
 
-void			parse(std::list<Token *> input);
+void			parse(std::list<Token *> input, Error & errMsg);
 
 /* ARGUMENTPARSING.CPP */
 
-bool			checkArgRange(Token * src, int range, std::string * errMsg, std::list<Token *> input);
+bool			checkArgRange(Token * src, int range, Error & errMsg, std::list<Token *> input);
 
 /* OPERATIONS.CPP */
 

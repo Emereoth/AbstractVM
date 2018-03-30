@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 18:15:23 by acottier          #+#    #+#             */
-/*   Updated: 2018/03/16 14:46:57 by acottier         ###   ########.fr       */
+/*   Updated: 2018/03/26 14:54:48 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,90 @@ class Operand : public IOperand
 		Operand(void);
 		Operand(Operand const & src);
 
-		eOperandType					_type;
 		T								_value;
+		eOperandType					_type;
+		std::string						_string;
 };
+
+template <typename T>
+Operand<T>::Operand(T value, eOperandType type) : _value(value), _type(type), _string(std::to_string(_value)) {}
+
+template <typename T>
+Operand<T>::~Operand(void) {}
+
+template <typename T>
+int					Operand<T>::getPrecision(void) const
+{
+	return ((int)_type);
+}
+
+template <typename T>
+eOperandType		Operand<T>::getType(void) const
+{
+	return (_type);
+}
+
+template <typename T>
+T					Operand<T>::getValue(void) const
+{
+	return (_value);
+}
+
+template <typename T>
+IOperand	const *	Operand<T>::operator+(IOperand const & rhs) const
+{
+	(void)rhs;
+	return (this);
+}
+
+template <typename T>
+IOperand	const *	Operand<T>::operator-(IOperand const & rhs) const
+{
+	(void)rhs;
+	return (this);
+}
+
+template <typename T>
+IOperand	const *	Operand<T>::operator*(IOperand const & rhs) const
+{
+	(void)rhs;
+	return (this);
+}
+
+template <typename T>
+IOperand	const *	Operand<T>::operator/(IOperand const & rhs) const
+{
+	(void)rhs;
+	return (this);
+}
+
+template <typename T>
+IOperand	const *	Operand<T>::operator%(IOperand const & rhs) const
+{
+	(void)rhs;
+	return (this);
+}
+
+template <typename T>
+IOperand	&		Operand<T>::operator=(IOperand const & rhs)
+{
+	_type = rhs.getType();
+	_value = static_cast<Operand<T> *>(rhs)->_value;
+}
+
+template <typename T>
+std::string	const &	Operand<T>::toString(void) const
+{
+	return (_string);
+}
+
+template <typename T>
+Operand<T>::Operand(void) {}
+
+template <typename T>
+Operand<T>::Operand(Operand<T> const & src)
+{
+	(void)src;
+}
 
 #endif

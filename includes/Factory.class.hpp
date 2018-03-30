@@ -6,14 +6,13 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 14:48:31 by acottier          #+#    #+#             */
-/*   Updated: 2018/03/13 15:39:45 by acottier         ###   ########.fr       */
+/*   Updated: 2018/03/20 12:26:38 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FACTORY_HPP
 # define FACTORY_HPP
 
-#include "IOperand.hpp"
 #include "Operand.class.hpp"
 
 class Factory

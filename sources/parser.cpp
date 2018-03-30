@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 14:13:14 by acottier          #+#    #+#             */
-/*   Updated: 2018/02/06 17:30:53 by acottier         ###   ########.fr       */
+/*   Updated: 2018/03/28 15:04:22 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /*
 ** Checks if operation (first word on line) is valid and recognized by AVM syntax
 */
-bool		validOpCheck(Token * ii, std::string * errMsg, std::list<Token *> input)
+bool		validOpCheck(Token * ii, Error & errMsg, std::list<Token *> input)
 {
 	std::string			ops[11] = { "pop" , "dump" , "add" , "sub" , "mul" , "div" , "mod" , "print" , "exit", "push", "assert" };
 	std::string			operation = ii->getContent();
@@ -31,14 +31,14 @@ bool		validOpCheck(Token * ii, std::string * errMsg, std::list<Token *> input)
 	}
 	newMsg << "Error on line " << ii->getLine() << ": \"" << showFullContent(input, ii->getLine())
 		<< "\" : unknown operator \"" << operation << "\"" << std::endl;;
-	(*errMsg).append(newMsg.str());
+	errMsg.addMsg(newMsg.str());
 	return (false);
 }
 
 /*
 ** Checks if operation (first word on line) accepts an operand
 */
-bool		opTypeCheck(Token * ii, std::string * errMsg, std::list<Token *> input, Token * lastOp)
+bool		opTypeCheck(Token * ii, Error & errMsg, std::list<Token *> input, Token * lastOp)
 {
 	std::string			lastOpStr = lastOp->getContent();
 	std::stringstream	newMsg;
@@ -47,15 +47,14 @@ bool		opTypeCheck(Token * ii, std::string * errMsg, std::list<Token *> input, To
 		return (true);
 	newMsg << "Error on line " << ii->getLine() << ": \"" << showFullContent(input, ii->getLine())
 		<< "\" : operation does not take argument" << std::endl;
-	if (errMsg)
-		(*errMsg).append(newMsg.str());
+	errMsg.addMsg(newMsg.str());
 	return (false);
 }
 
 /*
 ** Checks if argument (second word on line) is of the right type and follows a operation needing an operand
 */
-bool		validArgCheck(Token * ii, std::string * errMsg, std::list<Token *> input, Token * lastOp)
+bool		validArgCheck(Token * ii, Error & errMsg, std::list<Token *> input, Token * lastOp)
 {
 	std::string					operation = ii->getContent();
 	std::stringstream			newMsg;
@@ -68,7 +67,7 @@ bool		validArgCheck(Token * ii, std::string * errMsg, std::list<Token *> input, 
 	{
 		newMsg << "Error on line " << ii->getLine() << ": \"" << showFullContent(input, ii->getLine())
 		<< "\" : invalid argument formatting \"" << operation << "\"" << std::endl;;
-		(*errMsg).append(newMsg.str());
+		errMsg.addMsg(newMsg.str());
 		return (false);
 	}
 	for (int i = 0 ; i < 5 ; i++)
@@ -78,14 +77,14 @@ bool		validArgCheck(Token * ii, std::string * errMsg, std::list<Token *> input, 
 	}
 	newMsg << "Error on line " << ii->getLine() << ": \"" << showFullContent(input, ii->getLine())
 		<< "\" : invalid argument \"" << operation << "\"" << std::endl;
-	(*errMsg).append(newMsg.str());
+	errMsg.addMsg(newMsg.str());
 	return (false);
 }
 
 /*
 ** Check if operation needs argument and if it does, chcks if it has them
 */
-bool		opHasArgument(std::list<Token *>::iterator ii, std::string * errMsg, std::list<Token *> input, bool validLine)
+bool		opHasArgument(std::list<Token *>::iterator ii, Error & errMsg, std::list<Token *> input, bool validLine)
 {
 	std::stringstream				newMsg;
 	std::list<Token *>::iterator	current;
@@ -100,7 +99,7 @@ bool		opHasArgument(std::list<Token *>::iterator ii, std::string * errMsg, std::
 			return (true);
 		newMsg << "Error on line " << (*current)->getLine() << ": \"" << showFullContent(input, (*current)->getLine())
 		<< "\" : operation needs argument" << std::endl;
-		(*errMsg).append(newMsg.str());
+		errMsg.addMsg(newMsg.str());
 		return (false);
 	}
 	return (true);
@@ -109,10 +108,9 @@ bool		opHasArgument(std::list<Token *>::iterator ii, std::string * errMsg, std::
 /*
 ** Walks through input list and checks for semantic errors
 */
-void		parse(std::list<Token *> input)
+void		parse(std::list<Token *> input, Error & errMsg)
 {
 	bool							validLine = true;
-	std::string						errMsg;
 	int								lastErrorLine = -1;
 	Token *							lastOp = NULL;
 	bool							exitStatus = false;
@@ -126,17 +124,20 @@ void		parse(std::list<Token *> input)
 		if ((*ii)->getInputType() == 0)
 		{
 			lastOp = (*ii);
-			validLine = validOpCheck((*ii), &errMsg, input);
-			validLine = opHasArgument(ii, &errMsg, input, validLine);
+			validLine = validOpCheck((*ii), errMsg, input);
+			validLine = opHasArgument(ii, errMsg, input, validLine);
 			lastErrorLine = (validLine ? -1 : (*ii)->getLine());
 			if (validLine && !((*ii)->getContent().compare("exit")))
 				exitStatus = true;
 		}
 		else if ((*ii)->getInputType() == 1)
-			validLine = validArgCheck((*ii), &errMsg, input, lastOp);
+			validLine = validArgCheck((*ii), errMsg, input, lastOp);
 	}
-	if (!errMsg.empty())
+	if (!errMsg.isEmpty())
 		throw errMsg;
 	else if (!exitStatus)
-		throw errMsg = "Error : no \"exit\" instruction found\n";
+	{
+		errMsg.addMsg("Error : no \"exit\" instruction found\n");
+		throw errMsg;
+	}
 }
