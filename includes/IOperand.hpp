@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 10:52:46 by acottier          #+#    #+#             */
-/*   Updated: 2018/02/12 13:36:15 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/03 15:09:14 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include <string>
 
-enum class eOperandType 
+enum eOperandType 
 {
 	Int8,
 	Int16,

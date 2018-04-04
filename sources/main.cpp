@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 16:14:38 by acottier          #+#    #+#             */
-/*   Updated: 2018/03/26 16:06:58 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/04 14:57:17 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ int  		   main(int argc, char **argv)
 		synCheck(input, errMsg);
 		parse(input, errMsg);
 	}
-	catch (Error * errMsg)
+	catch (Error errMsg)
 	{
-		std::cout << errMsg->getMsg();
+		std::cout << errMsg.getMsg();
 		return (1);
 	}
     return (0);

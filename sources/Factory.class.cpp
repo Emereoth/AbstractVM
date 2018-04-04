@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 14:52:52 by acottier          #+#    #+#             */
-/*   Updated: 2018/03/30 16:05:21 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/04 14:28:59 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,15 @@ Factory::~Factory(void) {}
 
 IOperand const *	Factory::createOperand(std::string const & value, eOperandType type) const
 {
-	std::map<eOperandType, IOperand const * (f*) (std::string const) const>	functionMap;
-	// IOperand const *	(Factory::*f[5])(std::string const &) const = {&Factory::createInt8, &Factory::createInt16, 
-	// 						&Factory::createInt32, &Factory::createFloat, &Factory::createDouble};
-	
-	// return (*f[type](value));
-	// (void)type;
-	// return (Factory::createInt8(value));
+	std::map<eOperandType, IOperand const * (Factory::*) (std::string const &) const>	functionMap = 
+	{
+		{Int8, &Factory::createInt8},
+		{Int16, &Factory::createInt16},
+		{Int32, &Factory::createInt32},
+		{Float, &Factory::createFloat},
+		{Double, &Factory::createDouble}
+	};
+	return ((this->*(functionMap[type]))(value));
 }
 
 IOperand const *	Factory::createInt8(std::string const & value) const
