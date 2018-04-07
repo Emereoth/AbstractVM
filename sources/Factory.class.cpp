@@ -6,11 +6,12 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 14:52:52 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/04 14:28:59 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/07 13:39:44 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Factory.class.hpp"
+#include "../includes/Operand.class.hpp"
 #include <map>
 
 Factory::Factory(void) {}

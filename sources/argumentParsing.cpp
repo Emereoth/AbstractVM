@@ -6,13 +6,14 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/03 12:30:33 by acottier          #+#    #+#             */
-/*   Updated: 2018/03/28 15:03:21 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/07 13:43:51 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <limits.h>
 #include <float.h>
 #include <sstream>
+#include <map>
 #include "../includes/avm.hpp"
 
 std::string	extractValue(std::string const & src)
@@ -117,25 +118,29 @@ bool		argRangeFloat(Token * src, Error & errMsg, std::list<Token *> input)
 
 bool		argRangeDouble(Token * src, Error & errMsg, std::list<Token *> input)
 {
-	double				res;
-	std::stringstream	newMsg;
+	// double				res;
+	// std::stringstream	newMsg;
 
-	res = stod(extractValue(src->getContent()));
-	if (res > DBL_MAX)
-	{
-		newMsg << "Error on line " << src->getLine() << ": \"" << showFullContent(input, src->getLine())
-			<< "\": double overflow (-1.79769e+308 < double < 1.79769e+308)";
-		errMsg.addMsg(newMsg.str());
-		return (false);
-	}
-	else if (res < -DBL_MAX)
-	{
-		newMsg << "Error on line " << src->getLine() << ": \"" << showFullContent(input, src->getLine())
-			<< "\": double underflow (-1.79769e+308 < double < 1.79769e+308)";
-		errMsg.addMsg(newMsg.str());
-		return (false);
-	}
+	(void)src;
+	(void)errMsg;
+	(void)input;
 	return (true);
+	// res = stod(extractValue(src->getContent()));
+	// if (res > DBL_MAX)
+	// {
+	// 	newMsg << "Error on line " << src->getLine() << ": \"" << showFullContent(input, src->getLine())
+	// 		<< "\": double overflow (-1.79769e+308 < double < 1.79769e+308)";
+	// 	errMsg.addMsg(newMsg.str());
+	// 	return (false);
+	// }
+	// else if (res < -DBL_MAX)
+	// {
+	// 	newMsg << "Error on line " << src->getLine() << ": \"" << showFullContent(input, src->getLine())
+	// 		<< "\": double underflow (-1.79769e+308 < double < 1.79769e+308)";
+	// 	errMsg.addMsg(newMsg.str());
+	// 	return (false);
+	// }
+	// return (true);
 }
 
 bool		checkArgRange(Token * src, int range, Error & errMsg, std::list<Token *> input)
@@ -157,4 +162,25 @@ bool		checkArgRange(Token * src, int range, Error & errMsg, std::list<Token *> i
 	errMsg.addMsg("Unexpected error. This shouldn't happen, like, ever.");
 	throw errMsg;
 	return (false);
+}
+
+void		checkOpRange(eOperandType type, std::string const & v1, std::string const & v2)
+{
+	Error							err;
+	std::map<eOperandType, double> limitMap = 
+	{
+		{Int8, CHAR_MAX},
+		{Int16, SHRT_MAX},
+		{Int32, INT_MAX},
+		{Float, FLT_MAX}
+	};
+	bool							isFloating = (type == Float || type == Double ? true : false);
+	double							res = (isFloating ? stod(v1) + stod(v2) : std::atoi(v1.c_str()) + std::atoi(v2.c_str()));
+
+	if (res > limitMap[type])
+		err.addMsg("Error: Overflow.");
+	if (res < -(limitMap[type]))
+		err.addMsg("Error: Underflow.");
+	if (!err.isEmpty())
+		throw err;
 }

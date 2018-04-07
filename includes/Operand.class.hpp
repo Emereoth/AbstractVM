@@ -6,15 +6,19 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 18:15:23 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/04 16:32:17 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/07 15:50:25 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OPERAND_HPP
 # define OPERAND_HPP
 
-#include "IOperand.hpp"
 #include "Factory.class.hpp"
+#include "IOperand.hpp"
+#include "Error.class.hpp"
+#include "avm.hpp"
+#include <sstream>
+#include <math.h>
 
 enum class opType 
 {
@@ -85,41 +89,73 @@ T					Operand<T>::getValue(void) const
 template <typename T>
 IOperand	const *	Operand<T>::operator+(IOperand const & rhs) const
 {
-	eOperandType		retType = this.opResultType(rhs);
-	IOperand const *	res = Factory::createInt8(_string);
-	return (this);
+	eOperandType		retType = this->opResultType(rhs);
+	Factory				factory;
+	std::stringstream	ss;
+
+	checkOpRange(retType, this->toString(), rhs.toString());
+	ss << _value + std::stod(rhs.toString());
+	return (factory.createOperand(ss.str(), retType));
 }
 
 template <typename T>
 IOperand	const *	Operand<T>::operator-(IOperand const & rhs) const
 {
-	eOperandType		retType = this.opResultType(rhs);
-	IOperand const *	res = Factory::createInt16(_string);
-	return (this);
+	eOperandType		retType = this->opResultType(rhs);
+	Factory				factory;
+	std::stringstream	ss;
+
+	checkOpRange(retType, this->toString(), rhs.toString());
+	ss << _value - std::stod(rhs.toString());
+	return (factory.createOperand(ss.str(), retType));
 }
 
 template <typename T>
 IOperand	const *	Operand<T>::operator*(IOperand const & rhs) const
 {
-	eOperandType		retType = this.opResultType(rhs);
-	IOperand const *	res = Factory::createInt32(_string);
-	return (this);
+	eOperandType		retType = this->opResultType(rhs);
+	Factory				factory;
+	std::stringstream	ss;
+
+	checkOpRange(retType, this->toString(), rhs.toString());
+	ss << _value * std::stod(rhs.toString());
+	return (factory.createOperand(ss.str(), retType));
 }
 
 template <typename T>
 IOperand	const *	Operand<T>::operator/(IOperand const & rhs) const
 {
-	eOperandType		retType = this.opResultType(rhs);
-	IOperand const *	res = Factory::createFloat(_string);
-	return (this);
+	eOperandType		retType = this->opResultType(rhs);
+	Factory				factory;
+	std::stringstream	ss;
+	Error				err;
+
+	if (std::stod(rhs.toString()) == 0 && retType != Float && retType != Double)
+	{
+		err.addMsg("Error: Division by 0.");
+		throw err;
+	}
+	checkOpRange(retType, this->toString(), rhs.toString());
+	ss << _value / std::stod(rhs.toString());
+	return (factory.createOperand(ss.str(), retType));
 }
 
 template <typename T>
 IOperand	const *	Operand<T>::operator%(IOperand const & rhs) const
 {
-	eOperandType		retType = this.opResultType(rhs);
-	IOperand const *	res = Factory::createDouble(_string);
-	return (this);
+	eOperandType		retType = this->opResultType(rhs);
+	Factory				factory;
+	std::stringstream	ss;
+	Error				err;
+
+	if (std::stod(rhs.toString()) == 0 && retType != Float && retType != Double)
+	{
+		err.addMsg("Error: Division by 0.");
+		throw err;
+	}
+	checkOpRange(retType, this->toString(), rhs.toString());
+	ss << fmod(std::stod(_string), std::stod(rhs.toString()));
+	return (factory.createOperand(ss.str(), retType));
 }
 
 template <typename T>
@@ -145,7 +181,7 @@ Operand<T>::Operand(Operand<T> const & src)
 }
 
 template <typename T>
-eOperandType		Operand<T>::opResultType(IOperand const & rhs)
+eOperandType		Operand<T>::opResultType(IOperand const & rhs) const
 {
 	return (_type > rhs.getType() ? _type : rhs.getType() );
 }
