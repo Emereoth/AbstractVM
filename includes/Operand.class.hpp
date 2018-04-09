@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 18:15:23 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/07 15:50:25 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/09 15:53:37 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,5 +185,4 @@ eOperandType		Operand<T>::opResultType(IOperand const & rhs) const
 {
 	return (_type > rhs.getType() ? _type : rhs.getType() );
 }
-
 #endif

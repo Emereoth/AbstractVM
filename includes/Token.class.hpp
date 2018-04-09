@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 16:37:26 by acottier          #+#    #+#             */
-/*   Updated: 2018/02/06 17:32:01 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/09 18:14:00 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,6 @@
 #include <string>
 #include <vector>
 #include <list>
-
-enum ErrorType
-{
-	UNKNOWN_OPERATOR, // HANDLED
-	DOUBLE_OPERATOR, // HANDLED
-	OVERFLOW, // HANDLED IN INPUTS
-	UNDERFLOW, // HANDLED IN INPUTS
-	EMPTY_STACK, 
-	DIV_BY_ZERO,
-	NO_EXIT, // HANDLED
-	FAILED_ASSERT,
-	LOW_STACK,
-    EXTRA_OPERAND // HANDLED
-};
 
 enum Range
 {
