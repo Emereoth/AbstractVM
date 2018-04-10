@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 14:13:14 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/04 14:57:51 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/10 14:26:43 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ void		parse(std::list<Token *> input, Error & errMsg)
 		throw errMsg;
 	else if (!exitStatus)
 	{
-		errMsg.addMsg("Error : no \"exit\" instruction found\n");
+		errMsg.addMsg("Error : no \'exit\' instruction found\n");
 		throw errMsg;
 	}
 }

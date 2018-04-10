@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 14:44:57 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/09 16:16:40 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/10 10:17:32 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include <vector>
 #include <iostream>
 #include "IOperand.hpp"
-// #include "Operand.class.hpp"
 #include "Token.class.hpp"
 #include "Error.class.hpp"
 
@@ -50,6 +49,6 @@ bool			checkStack(Error & errMsg);
 
 /* EXECUTE.CPP */
 
-// void			walkthrough(std::list<Token *> input, Error & errMsg);
+void			walkthrough(std::list<Token *> input, Error & errMsg);
 
 #endif

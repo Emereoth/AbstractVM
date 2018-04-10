@@ -6,7 +6,7 @@
 #    By: acottier <acottier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/13 09:21:32 by acottier          #+#    #+#              #
-#    Updated: 2018/03/26 15:18:55 by acottier         ###   ########.fr        #
+#    Updated: 2018/04/10 14:31:17 by acottier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,9 @@ SRC_NAMES	= 	main.cpp \
 				argumentParsing.cpp \
 				operations.cpp \
 				Factory.class.cpp \
-				Error.class.cpp
-
+				Error.class.cpp \
+				execute.cpp
+				
 OBJ_NAMES	= $(SRC_NAMES:.cpp=.o)
 
 SRC			= $(addprefix $(SRC_PATH)/,$(SRC_NAMES))
