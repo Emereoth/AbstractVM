@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 16:01:18 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/10 16:17:03 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/12 18:56:07 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,49 @@
 #include "../includes/Token.class.hpp"
 #include "../includes/Operand.class.hpp"
 
-void			getExecOperands(std::stack<IOperand const *> stack, IOperand const **v1, IOperand const **v2, Error & errMsg)
+enum eOperationType
 {
-	if (stack.empty())
-		errMsg.addMsg("Error: couldn't find enough operands.");
+	ADD,
+	SUB,
+	MUL,
+	DIV,
+	MOD
+};
+
+void			doOp(std::stack<IOperand const *> &stack, eOperationType type, Error & errMsg)
+{
+	if (stack.size() > 1)
+	{
+		IOperand const *v1 = stack.top();
+		stack.pop();
+		IOperand const *v2 = stack.top();
+		stack.pop();
+		switch (type)
+		{
+			case ADD:
+				stack.push(*v1 + *v2);
+			case SUB:
+				stack.push(*v1 - *v2);
+			case MUL:
+				stack.push(*v1 * *v2);
+			case DIV:
+				stack.push(*v1 / *v2);
+			case MOD:
+				stack.push(*v1 % *v2);
+		}
+		delete v1;
+		delete v2;
+	}
 	else
 	{
-		v1 = &stack.top();
-		stack.pop();
-		if (stack.empty())
-			errMsg.addMsg("Error: couldn't find enough operands.");
-		else
-		{
-			v2 = &stack.top();
-			stack.pop();
-		}
-	}
-	if (!errMsg.isEmpty())
+		errMsg.addMsg("Error: couldn't find enough operands.");
 		throw errMsg;
+	}
 }
 
 std::string		getExecValue(std::string const & arg)
 {
-	return (arg.substr(arg.find('('), arg.find(')', arg.find('('))));
+	return (arg.substr(arg.find('(') + 1, arg.find(')') - arg.find('(') - 1));
 }
 
 eOperandType	getExecType(std::string const & arg)
@@ -101,56 +121,36 @@ void 			opAssert(std::stack<IOperand const *> & stack, std::string const & arg, 
 void			opAdd(std::stack<IOperand const *> & stack, std::string const & arg, Error & errMsg)
 {
 	(void)arg;
-	IOperand	const *v1;
-	IOperand	const *v2;
-	Factory		factory;
-
-	getExecOperands(stack, &v1, &v2, errMsg);
-	stack.push(*v1 + *v2);
+	
+	doOp(stack, ADD, errMsg);
 }
 
 void			opSub(std::stack<IOperand const *> & stack, std::string const & arg, Error & errMsg)
 {
 	(void)arg;
-	IOperand	const *v1;
-	IOperand	const *v2;
-	Factory		factory;
-
-	getExecOperands(stack, &v1, &v2, errMsg);
-	stack.push(*v1 - *v2);
+	
+	doOp(stack, SUB, errMsg);
 }
 
 void			opMul(std::stack<IOperand const *> & stack, std::string const & arg, Error & errMsg)
 {
 	(void)arg;
-	IOperand	const *v1;
-	IOperand	const *v2;
-	Factory		factory;
-
-	getExecOperands(stack, &v1, &v2, errMsg);
-	stack.push(*v1 * *v2);
+	
+	doOp(stack, MUL, errMsg);
 }
 
 void			opDiv(std::stack<IOperand const *> & stack, std::string const & arg, Error & errMsg)
 {
 	(void)arg;
-	IOperand	const *v1;
-	IOperand	const *v2;
-	Factory		factory;
-
-	getExecOperands(stack, &v1, &v2, errMsg);
-	stack.push(*v1 / * v2);
+	
+	doOp(stack, DIV, errMsg);
 }
 
 void			opMod(std::stack<IOperand const *> & stack, std::string const & arg, Error & errMsg)
 {
 	(void)arg;
-	IOperand	const *v1;
-	IOperand	const *v2;
-	Factory		factory;
-
-	getExecOperands(stack, &v1, &v2, errMsg);
-	stack.push(*v1 % *v2);
+	
+	doOp(stack, MOD, errMsg);
 }
 
 void			opPrint(std::stack<IOperand const *> & stack, std::string const & arg, Error & errMsg)
@@ -178,7 +178,7 @@ void			opExit(std::stack<IOperand const *> & stack, std::string const & arg, Err
 
 void			execute(std::stack<IOperand const *> & stack, std::list<Token *>::iterator ii, Error & errMsg)
 {
-	std::map<std::string const &, void (*) (std::stack<IOperand const *>, std::string const &, Error &)> functionMap = 
+	std::map<std::string const , void (*) (std::stack<IOperand const *> &, std::string const &, Error &)> functionMap = 
 	{
 		{"push", &opPush},
 		{"pop", &opPop},
@@ -192,8 +192,10 @@ void			execute(std::stack<IOperand const *> & stack, std::list<Token *>::iterato
 		{"print", &opPrint},
 		{"exit", &opExit}
 	};
-
-	functionMap[(*ii)->getContent()](stack, (*(ii++))->getContent(), errMsg);
+	std::list<Token *>::iterator	next = ii;
+	if (!(*ii)->getContent().compare("push") || !(*ii)->getContent().compare("assert"))
+		next++;
+	functionMap[(*ii)->getContent()](stack, (*next)->getContent(), errMsg);
 }
 
 void			walkthrough(std::list<Token *> input, Error & errMsg)
@@ -206,13 +208,7 @@ void			walkthrough(std::list<Token *> input, Error & errMsg)
 		if ((*ii)->getInputType() == INSTRUCTION)
 		{
 			cmd = (*ii)->getContent();
-			if (cmd.compare("push") || cmd.compare("assert"))
-			{
-				execute(stack, ii, errMsg);
-				ii++;
-			}
-			else
-				execute(stack, ii, errMsg);
+			execute(stack, ii, errMsg);
 		}
 	}
 }

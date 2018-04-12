@@ -1,0 +1,470 @@
+==6815== Memcheck, a memory error detector
+==6815== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==6815== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==6815== Command: ./avm test
+==6815== 
+==6815== Memcheck, a memory error detector
+==6815== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==6815== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==6815== Command: ./avm test
+==6815== 
+==6815== Syscall param msg->desc.port.name points to uninitialised byte(s)
+==6815==    at 0x1004F534A: mach_msg_trap (in /usr/lib/system/libsystem_kernel.dylib)
+==6815== Syscall param msg->desc.port.name points to uninitialised byte(s)
+==6815==    at 0x1004F534A: mach_msg_trap (in /usr/lib/system/libsystem_kernel.dylib)
+==6815==    by 0x1004F4796: mach_msg (in /usr/lib/system/libsystem_kernel.dylib)
+==6815==    by 0x1004EE485: task_set_special_port (in /usr/lib/system/libsystem_kernel.dylib)
+==6815==    by 0x10068A10E: _os_trace_create_debug_control_port (in /usr/lib/system/libsystem_trace.dylib)
+==6815==    by 0x10068A458: _libtrace_init (in /usr/lib/system/libsystem_trace.dylib)
+==6815==    by 0x1001BA9DF: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==6815==    by 0x1004F4796: mach_msg (in /usr/lib/system/libsystem_kernel.dylib)
+==6815==    by 0x1004EE485: task_set_special_port (in /usr/lib/system/libsystem_kernel.dylib)
+==6815==    by 0x10068A10E: _os_trace_create_debug_control_port (in /usr/lib/system/libsystem_trace.dylib)
+==6815==    by 0x10068A458: _libtrace_init (in /usr/lib/system/libsystem_trace.dylib)
+==6815==    by 0x1001BA9DF: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==6815==    by 0x100076A1A: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==6815==    by 0x100076A1A: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==6815==    by 0x100076C1D: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==6815==    by 0x100076C1D: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==6815==    by 0x1000724A9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==6815==    by 0x1000724A9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==6815==    by 0x100072440: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==6815==    by 0x100072440: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==6815==    by 0x100071523: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==6815==    by 0x1000715B8: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==6815==  Address 0x1048e9c8c is on thread 1's stack
+==6815==  in frame #2, created by task_set_special_port (???:)
+==6815==  Uninitialised value was created by a stack allocation
+==6815==    by 0x100071523: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==6815==    by 0x1000715B8: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==6815==  Address 0x1048e9c8c is on thread 1's stack
+==6815==  in frame #2, created by task_set_special_port (???:)
+==6815==  Uninitialised value was created by a stack allocation
+==6815==    at 0x10068A0A6: _os_trace_create_debug_control_port (in /usr/lib/system/libsystem_trace.dylib)
+==6815==    at 0x10068A0A6: _os_trace_create_debug_control_port (in /usr/lib/system/libsystem_trace.dylib)
+==6815== 
+==6815== 
+==6815== Use of uninitialised value of size 8
+==6815== Use of uninitialised value of size 8
+==6815==    at 0x10002F0DF: opAdd(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&) (in ./avm)
+==6815==    by 0x100031173: execute(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::__list_iterator<Token*, void*>, Error&, std::__1::list<Token*, std::__1::allocator<Token*> >) (in ./avm)
+==6815==    at 0x10002F0DF: opAdd(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&) (in ./avm)
+==6815==    by 0x100031173: execute(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::__list_iterator<Token*, void*>, Error&, std::__1::list<Token*, std::__1::allocator<Token*> >) (in ./avm)
+==6815==    by 0x100031DCC: walkthrough(std::__1::list<Token*, std::__1::allocator<Token*> >, Error&) (in ./avm)
+==6815==    by 0x100001A01: main (in ./avm)
+==6815==    by 0x100031DCC: walkthrough(std::__1::list<Token*, std::__1::allocator<Token*> >, Error&) (in ./avm)
+==6815==    by 0x100001A01: main (in ./avm)
+==6815==  Uninitialised value was created by a stack allocation
+==6815==  Uninitialised value was created by a stack allocation
+==6815==    at 0x10002F0A0: opAdd(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&) (in ./avm)
+==6815== 
+==6815==    at 0x10002F0A0: opAdd(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&) (in ./avm)
+==6815== 
+==6815== Invalid read of size 8
+==6815==    at 0x10002F0E2: opAdd(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&) (in ./avm)
+==6815== Invalid read of size 8
+==6815==    at 0x10002F0E2: opAdd(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&) (in ./avm)
+==6815==    by 0x100031173: execute(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::__list_iterator<Token*, void*>, Error&, std::__1::list<Token*, std::__1::allocator<Token*> >) (in ./avm)
+==6815==    by 0x100031DCC: walkthrough(std::__1::list<Token*, std::__1::allocator<Token*> >, Error&) (in ./avm)
+==6815==    by 0x100001A01: main (in ./avm)
+==6815==    by 0x100031173: execute(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::__list_iterator<Token*, void*>, Error&, std::__1::list<Token*, std::__1::allocator<Token*> >) (in ./avm)
+==6815==    by 0x100031DCC: walkthrough(std::__1::list<Token*, std::__1::allocator<Token*> >, Error&) (in ./avm)
+==6815==    by 0x100001A01: main (in ./avm)
+==6815==  Address 0x64646116 is not stack'd, malloc'd or (recently) free'd
+==6815== 
+==6815==  Address 0x64646116 is not stack'd, malloc'd or (recently) free'd
+==6815== 
+==6815== 
+==6815== Process terminating with default action of signal 11 (SIGSEGV)
+==6815==  Access not within mapped region at address 0x64646116
+==6815== 
+==6815== Process terminating with default action of signal 11 (SIGSEGV)
+==6815==  Access not within mapped region at address 0x64646116
+==6815==    at 0x10002F0E2: opAdd(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&) (in ./avm)
+==6815==    by 0x100031173: execute(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::__list_iterator<Token*, void*>, Error&, std::__1::list<Token*, std::__1::allocator<Token*> >) (in ./avm)
+==6815==    by 0x100031DCC: walkthrough(std::__1::list<Token*, std::__1::allocator<Token*> >, Error&) (in ./avm)
+==6815==    by 0x100001A01: main (in ./avm)
+==6815==    at 0x10002F0E2: opAdd(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&) (in ./avm)
+==6815==    by 0x100031173: execute(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::__list_iterator<Token*, void*>, Error&, std::__1::list<Token*, std::__1::allocator<Token*> >) (in ./avm)
+==6815==    by 0x100031DCC: walkthrough(std::__1::list<Token*, std::__1::allocator<Token*> >, Error&) (in ./avm)
+==6815==    by 0x100001A01: main (in ./avm)
+==6815==  If you believe this happened as a result of a stack
+==6815==  overflow in your program's main thread (unlikely but
+==6815==  possible), you can try to increase the size of the
+==6815==  main thread stack using the --main-stacksize= flag.
+==6815==  The main thread stack size used in this run was 8388608.
+==6815==  If you believe this happened as a result of a stack
+==6815==  overflow in your program's main thread (unlikely but
+==6815==  possible), you can try to increase the size of the
+==6815==  main thread stack using the --main-stacksize= flag.
+==6815==  The main thread stack size used in this run was 8388608.
+==6815== 
+==6815== HEAP SUMMARY:
+==6815==     in use at exit: 25,103 bytes in 246 blocks
+==6815==   total heap usage: 1,188 allocs, 942 frees, 64,495 bytes allocated
+==6815== 
+==6815== 
+==6815== HEAP SUMMARY:
+==6815==     in use at exit: 25,103 bytes in 246 blocks
+==6815==   total heap usage: 1,188 allocs, 942 frees, 64,495 bytes allocated
+==6815== 
+==6815== 8 bytes in 1 blocks are still reachable in loss record 1 of 51
+==6815==    at 0x1000F7A46: malloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x1001E2E0D: operator new(unsigned long) (in /usr/lib/libc++abi.dylib)
+==6815== 8 bytes in 1 blocks are still reachable in loss record 1 of 51
+==6815==    at 0x1000F7A46: malloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x1001E2E0D: operator new(unsigned long) (in /usr/lib/libc++abi.dylib)
+==6815==    by 0x10003C93B: std::__1::__split_buffer<IOperand const**, std::__1::allocator<IOperand const**>&>::__split_buffer(unsigned long, unsigned long, std::__1::allocator<IOperand const**>&) (in ./avm)
+==6815==    by 0x10003B66C: std::__1::__split_buffer<IOperand const**, std::__1::allocator<IOperand const**>&>::__split_buffer(unsigned long, unsigned long, std::__1::allocator<IOperand const**>&) (in ./avm)
+==6815==    by 0x100039D77: std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> >::__add_back_capacity() (in ./avm)
+==6815==    by 0x10003C93B: std::__1::__split_buffer<IOperand const**, std::__1::allocator<IOperand const**>&>::__split_buffer(unsigned long, unsigned long, std::__1::allocator<IOperand const**>&) (in ./avm)
+==6815==    by 0x10003B66C: std::__1::__split_buffer<IOperand const**, std::__1::allocator<IOperand const**>&>::__split_buffer(unsigned long, unsigned long, std::__1::allocator<IOperand const**>&) (in ./avm)
+==6815==    by 0x100039D77: std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> >::__add_back_capacity() (in ./avm)
+==6815==    by 0x100038627: std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> >::push_back(IOperand const*&&) (in ./avm)
+==6815==    by 0x100038627: std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> >::push_back(IOperand const*&&) (in ./avm)
+==6815==    by 0x10002E220: opPush(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&) (in ./avm)
+==6815==    by 0x100031173: execute(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::__list_iterator<Token*, void*>, Error&, std::__1::list<Token*, std::__1::allocator<Token*> >) (in ./avm)
+==6815==    by 0x100031DCC: walkthrough(std::__1::list<Token*, std::__1::allocator<Token*> >, Error&) (in ./avm)
+==6815==    by 0x100001A01: main (in ./avm)
+==6815== 
+==6815==    by 0x10002E220: opPush(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&) (in ./avm)
+==6815==    by 0x100031173: execute(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::__list_iterator<Token*, void*>, Error&, std::__1::list<Token*, std::__1::allocator<Token*> >) (in ./avm)
+==6815==    by 0x100031DCC: walkthrough(std::__1::list<Token*, std::__1::allocator<Token*> >, Error&) (in ./avm)
+==6815==    by 0x100001A01: main (in ./avm)
+==6815== 
+==6815== 24 bytes in 1 blocks are still reachable in loss record 4 of 51
+==6815==    at 0x1000F7CC6: malloc_zone_malloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x100700887: NXCreateMapTableFromZone (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100700859: NXCreateMapTable (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FF32D: __sel_registerName(char const*, int, int) (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FF02E: sel_init (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FE9B5: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100711D6A: map_images (in /usr/lib/libobjc.A.dylib)
+==6815== 24 bytes in 1 blocks are still reachable in loss record 4 of 51
+==6815==    at 0x1000F7CC6: malloc_zone_malloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x100700887: NXCreateMapTableFromZone (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100700859: NXCreateMapTable (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FF32D: __sel_registerName(char const*, int, int) (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FF02E: sel_init (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FE9B5: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100711D6A: map_images (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x10006603B: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==6815==    by 0x100066255: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==6815==    by 0x10006603B: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==6815==    by 0x100066255: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==6815==    by 0x10034C00A: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==6815==    by 0x1006FE072: _objc_init (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1002DF68D: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==6815==    by 0x10034C00A: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==6815==    by 0x1006FE072: _objc_init (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1002DF68D: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==6815== 
+==6815== 
+==6815== 32 bytes in 1 blocks are still reachable in loss record 10 of 51
+==6815== 32 bytes in 1 blocks are still reachable in loss record 10 of 51
+==6815==    at 0x1000F7CC6: malloc_zone_malloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x100700A24: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1007009F4: NXCreateHashTable (in /usr/lib/libobjc.A.dylib)
+==6815==    at 0x1000F7CC6: malloc_zone_malloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x100700A24: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1007009F4: NXCreateHashTable (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1007008CE: NXCreateMapTableFromZone (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100700859: NXCreateMapTable (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1007008CE: NXCreateMapTableFromZone (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100700859: NXCreateMapTable (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FF32D: __sel_registerName(char const*, int, int) (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FF02E: sel_init (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FF32D: __sel_registerName(char const*, int, int) (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FF02E: sel_init (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FE9B5: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100711D6A: map_images (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FE9B5: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100711D6A: map_images (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x10006603B: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==6815==    by 0x100066255: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==6815==    by 0x10034C00A: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==6815== 
+==6815==    by 0x10006603B: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==6815==    by 0x100066255: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==6815==    by 0x10034C00A: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==6815== 
+==6815== 32 bytes in 1 blocks are still reachable in loss record 11 of 51
+==6815==    at 0x1000F7CC6: malloc_zone_malloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x100700A45: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1007009F4: NXCreateHashTable (in /usr/lib/libobjc.A.dylib)
+==6815== 32 bytes in 1 blocks are still reachable in loss record 11 of 51
+==6815==    at 0x1000F7CC6: malloc_zone_malloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x100700A45: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1007009F4: NXCreateHashTable (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1007008CE: NXCreateMapTableFromZone (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1007008CE: NXCreateMapTableFromZone (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100700859: NXCreateMapTable (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FF32D: __sel_registerName(char const*, int, int) (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FF02E: sel_init (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100700859: NXCreateMapTable (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FF32D: __sel_registerName(char const*, int, int) (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FF02E: sel_init (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FE9B5: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100711D6A: map_images (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x10006603B: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==6815==    by 0x1006FE9B5: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100711D6A: map_images (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x10006603B: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==6815==    by 0x100066255: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==6815==    by 0x10034C00A: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==6815==    by 0x100066255: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==6815==    by 0x10034C00A: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==6815== 
+==6815== 
+==6815== 32 bytes in 1 blocks are still reachable in loss record 12 of 51
+==6815== 32 bytes in 1 blocks are still reachable in loss record 12 of 51
+==6815==    at 0x1000F7A46: malloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x100700B09: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1007009F4: NXCreateHashTable (in /usr/lib/libobjc.A.dylib)
+==6815==    at 0x1000F7A46: malloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x100700B09: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1007009F4: NXCreateHashTable (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1007008CE: NXCreateMapTableFromZone (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100700859: NXCreateMapTable (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1007008CE: NXCreateMapTableFromZone (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100700859: NXCreateMapTable (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FF32D: __sel_registerName(char const*, int, int) (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FF32D: __sel_registerName(char const*, int, int) (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FF02E: sel_init (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FE9B5: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FF02E: sel_init (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FE9B5: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100711D6A: map_images (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100711D6A: map_images (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x10006603B: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==6815==    by 0x10006603B: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==6815==    by 0x100066255: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==6815==    by 0x100066255: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==6815==    by 0x10034C00A: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==6815== 
+==6815==    by 0x10034C00A: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==6815== 
+==6815== 32 bytes in 1 blocks are still reachable in loss record 13 of 51
+==6815== 32 bytes in 1 blocks are still reachable in loss record 13 of 51
+==6815==    at 0x1000F7A46: malloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x100700934: NXCreateMapTableFromZone (in /usr/lib/libobjc.A.dylib)
+==6815==    at 0x1000F7A46: malloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x100700934: NXCreateMapTableFromZone (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100700859: NXCreateMapTable (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100700859: NXCreateMapTable (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FF32D: __sel_registerName(char const*, int, int) (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FF02E: sel_init (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FE9B5: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FF32D: __sel_registerName(char const*, int, int) (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FF02E: sel_init (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FE9B5: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100711D6A: map_images (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100711D6A: map_images (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x10006603B: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==6815==    by 0x10006603B: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==6815==    by 0x100066255: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==6815==    by 0x100066255: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==6815==    by 0x10034C00A: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==6815==    by 0x1006FE072: _objc_init (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x10034C00A: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==6815==    by 0x1006FE072: _objc_init (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1002DF68D: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==6815== 
+==6815==    by 0x1002DF68D: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==6815== 
+==6815== 48 bytes in 1 blocks are still reachable in loss record 17 of 51
+==6815== 48 bytes in 1 blocks are still reachable in loss record 17 of 51
+==6815==    at 0x1000F8275: malloc_zone_calloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x100700EDB: _NXHashRehashToCapacity (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100700E65: NXHashInsert (in /usr/lib/libobjc.A.dylib)
+==6815==    at 0x1000F8275: malloc_zone_calloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x100700EDB: _NXHashRehashToCapacity (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100700E65: NXHashInsert (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100700B33: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1007009F4: NXCreateHashTable (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100700B33: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1007009F4: NXCreateHashTable (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1007008CE: NXCreateMapTableFromZone (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100700859: NXCreateMapTable (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1007008CE: NXCreateMapTableFromZone (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100700859: NXCreateMapTable (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FF32D: __sel_registerName(char const*, int, int) (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FF02E: sel_init (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FE9B5: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100711D6A: map_images (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FF32D: __sel_registerName(char const*, int, int) (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FF02E: sel_init (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1006FE9B5: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100711D6A: map_images (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x10006603B: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==6815== 
+==6815==    by 0x10006603B: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==6815== 
+==6815== 72 bytes in 3 blocks are possibly lost in loss record 28 of 51
+==6815== 72 bytes in 3 blocks are possibly lost in loss record 28 of 51
+==6815==    at 0x1000F80B2: calloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x1006FE832: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100711D6A: map_images (in /usr/lib/libobjc.A.dylib)
+==6815==    at 0x1000F80B2: calloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x1006FE832: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x100711D6A: map_images (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x10006603B: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==6815==    by 0x10006603B: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==6815==    by 0x100066255: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==6815==    by 0x10034C00A: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==6815==    by 0x100066255: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==6815==    by 0x10034C00A: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==6815==    by 0x1006FE072: _objc_init (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1002DF68D: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==6815==    by 0x1006FE072: _objc_init (in /usr/lib/libobjc.A.dylib)
+==6815==    by 0x1002DF68D: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==6815==    by 0x1002DF63A: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==6815==    by 0x1001BA9D5: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==6815==    by 0x1002DF63A: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==6815==    by 0x1001BA9D5: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==6815==    by 0x100076A1A: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==6815==    by 0x100076A1A: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==6815==    by 0x100076C1D: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==6815== 
+==6815==    by 0x100076C1D: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==6815== 
+==6815== 80 bytes in 2 blocks are still reachable in loss record 29 of 51
+==6815== 80 bytes in 2 blocks are still reachable in loss record 29 of 51
+==6815==    at 0x1000F7A46: malloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x1001E2E0D: operator new(unsigned long) (in /usr/lib/libc++abi.dylib)
+==6815==    by 0x10001E0C3: Factory::createInt8(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const (in ./avm)
+==6815==    at 0x1000F7A46: malloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x1001E2E0D: operator new(unsigned long) (in /usr/lib/libc++abi.dylib)
+==6815==    by 0x10001E0C3: Factory::createInt8(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) const (in ./avm)
+==6815==    by 0x10001DF64: Factory::createOperand(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, eOperandType) const (in ./avm)
+==6815==    by 0x10001DF64: Factory::createOperand(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, eOperandType) const (in ./avm)
+==6815==    by 0x10002E1EA: opPush(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&) (in ./avm)
+==6815==    by 0x10002E1EA: opPush(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&) (in ./avm)
+==6815==    by 0x100031173: execute(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::__list_iterator<Token*, void*>, Error&, std::__1::list<Token*, std::__1::allocator<Token*> >) (in ./avm)
+==6815==    by 0x100031173: execute(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::__list_iterator<Token*, void*>, Error&, std::__1::list<Token*, std::__1::allocator<Token*> >) (in ./avm)
+==6815==    by 0x100031DCC: walkthrough(std::__1::list<Token*, std::__1::allocator<Token*> >, Error&) (in ./avm)
+==6815==    by 0x100001A01: main (in ./avm)
+==6815== 
+==6815==    by 0x100031DCC: walkthrough(std::__1::list<Token*, std::__1::allocator<Token*> >, Error&) (in ./avm)
+==6815==    by 0x100001A01: main (in ./avm)
+==6815== 
+==6815== 408 bytes in 17 blocks are still reachable in loss record 40 of 51
+==6815== 408 bytes in 17 blocks are still reachable in loss record 40 of 51
+==6815==    at 0x1000F7A46: malloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x1001E2E0D: operator new(unsigned long) (in /usr/lib/libc++abi.dylib)
+==6815==    at 0x1000F7A46: malloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x1001E2E0D: operator new(unsigned long) (in /usr/lib/libc++abi.dylib)
+==6815==    by 0x1000077C5: std::__1::list<Token*, std::__1::allocator<Token*> >::push_back(Token*&&) (in ./avm)
+==6815==    by 0x100007499: separate(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, int const&, std::__1::list<Token*, std::__1::allocator<Token*> >&, int*) (in ./avm)
+==6815==    by 0x1000082FE: readFile(char*, std::__1::list<Token*, std::__1::allocator<Token*> >&) (in ./avm)
+==6815==    by 0x1000077C5: std::__1::list<Token*, std::__1::allocator<Token*> >::push_back(Token*&&) (in ./avm)
+==6815==    by 0x100007499: separate(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, int const&, std::__1::list<Token*, std::__1::allocator<Token*> >&, int*) (in ./avm)
+==6815==    by 0x1000082FE: readFile(char*, std::__1::list<Token*, std::__1::allocator<Token*> >&) (in ./avm)
+==6815==    by 0x10000193E: main (in ./avm)
+==6815== 
+==6815==    by 0x10000193E: main (in ./avm)
+==6815== 
+==6815== 408 bytes in 17 blocks are still reachable in loss record 41 of 51
+==6815== 408 bytes in 17 blocks are still reachable in loss record 41 of 51
+==6815==    at 0x1000F7A46: malloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x1001E2E0D: operator new(unsigned long) (in /usr/lib/libc++abi.dylib)
+==6815==    at 0x1000F7A46: malloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x1001E2E0D: operator new(unsigned long) (in /usr/lib/libc++abi.dylib)
+==6815==    by 0x100005AF5: std::__1::list<Token*, std::__1::allocator<Token*> >::push_back(Token* const&) (in ./avm)
+==6815==    by 0x1000058C6: std::__1::list<Token*, std::__1::allocator<Token*> >::list(std::__1::list<Token*, std::__1::allocator<Token*> > const&) (in ./avm)
+==6815==    by 0x100001C3C: std::__1::list<Token*, std::__1::allocator<Token*> >::list(std::__1::list<Token*, std::__1::allocator<Token*> > const&) (in ./avm)
+==6815==    by 0x100005AF5: std::__1::list<Token*, std::__1::allocator<Token*> >::push_back(Token* const&) (in ./avm)
+==6815==    by 0x1000058C6: std::__1::list<Token*, std::__1::allocator<Token*> >::list(std::__1::list<Token*, std::__1::allocator<Token*> > const&) (in ./avm)
+==6815==    by 0x100001C3C: std::__1::list<Token*, std::__1::allocator<Token*> >::list(std::__1::list<Token*, std::__1::allocator<Token*> > const&) (in ./avm)
+==6815==    by 0x1000019E9: main (in ./avm)
+==6815== 
+==6815== 408 bytes in 17 blocks are still reachable in loss record 42 of 51
+==6815==    by 0x1000019E9: main (in ./avm)
+==6815== 
+==6815== 408 bytes in 17 blocks are still reachable in loss record 42 of 51
+==6815==    at 0x1000F7A46: malloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x1001E2E0D: operator new(unsigned long) (in /usr/lib/libc++abi.dylib)
+==6815==    at 0x1000F7A46: malloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x1001E2E0D: operator new(unsigned long) (in /usr/lib/libc++abi.dylib)
+==6815==    by 0x100005AF5: std::__1::list<Token*, std::__1::allocator<Token*> >::push_back(Token* const&) (in ./avm)
+==6815==    by 0x100005AF5: std::__1::list<Token*, std::__1::allocator<Token*> >::push_back(Token* const&) (in ./avm)
+==6815==    by 0x1000058C6: std::__1::list<Token*, std::__1::allocator<Token*> >::list(std::__1::list<Token*, std::__1::allocator<Token*> > const&) (in ./avm)
+==6815==    by 0x1000058C6: std::__1::list<Token*, std::__1::allocator<Token*> >::list(std::__1::list<Token*, std::__1::allocator<Token*> > const&) (in ./avm)
+==6815==    by 0x100001C3C: std::__1::list<Token*, std::__1::allocator<Token*> >::list(std::__1::list<Token*, std::__1::allocator<Token*> > const&) (in ./avm)
+==6815==    by 0x100001C3C: std::__1::list<Token*, std::__1::allocator<Token*> >::list(std::__1::list<Token*, std::__1::allocator<Token*> > const&) (in ./avm)
+==6815==    by 0x100031DA6: walkthrough(std::__1::list<Token*, std::__1::allocator<Token*> >, Error&) (in ./avm)
+==6815==    by 0x100001A01: main (in ./avm)
+==6815== 
+==6815==    by 0x100031DA6: walkthrough(std::__1::list<Token*, std::__1::allocator<Token*> >, Error&) (in ./avm)
+==6815==    by 0x100001A01: main (in ./avm)
+==6815== 
+==6815== 704 bytes in 11 blocks are still reachable in loss record 44 of 51
+==6815== 704 bytes in 11 blocks are still reachable in loss record 44 of 51
+==6815==    at 0x1000F7A46: malloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x1001E2E0D: operator new(unsigned long) (in /usr/lib/libc++abi.dylib)
+==6815==    at 0x1000F7A46: malloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x1001E2E0D: operator new(unsigned long) (in /usr/lib/libc++abi.dylib)
+==6815==    by 0x100042AAD: std::__1::unique_ptr<std::__1::__tree_node<std::__1::__value_type<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)>, void*>, std::__1::__tree_node_destructor<std::__1::allocator<std::__1::__tree_node<std::__1::__value_type<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)>, void*> > > > std::__1::__tree<std::__1::__value_type<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)>, std::__1::__map_value_compare<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::__value_type<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)>, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const>, true>, std::__1::allocator<std::__1::__value_type<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)> > >::__construct_node<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)> const&>(std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<cha==6815==    by 0x100042AAD: std::__1::unique_ptr<std::__1::__tree_node<std::__1::__value_type<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)>, void*>, std::__1::__tree_node_destructor<std::__1::allocator<std::__1::__tree_node<std::__1::__value_type<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)>, void*> > > > std::__1::__tree<std::__1::__value_type<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)>, std::__1::__map_value_compare<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::__value_type<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)>, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const>, true>, std::__1::allocator<std::__1::__value_type<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)> > >::__construct_node<std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)> const&>(std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)> const&) (in ./avm)
+r>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)> const&) (in ./avm)
+==6815==    by 0x10003FEB5: std::__1::__tree_iterator<std::__1::__value_type<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)>, std::__1::__tree_node<std::__1::__value_type<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)>, void*>*, long> std::__1::__tree<std::__1::__value_type<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::_==6815==    by 0x10003FEB5: std::__1::__tree_iterator<std::__1::__value_type<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)>, std::__1::__tree_node<std::__1::__value_type<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)>, void*>*, long> std::__1::__tree<std::__1::__value_type<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)>, std::__1::__map_value_compare<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::__value_type<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)>, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const>, true>, std::__1::allocator<std::__1::__value_type<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)> > >::__emplace_hint_unique_key_args<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)> const&>(std::__1::__tree_const_iterator<std::__1::___1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)>, std::__1::__map_value_compare<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, std::__1::__value_type<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)>, std::__1::less<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const>, true>, std::__1::allocator<std::__1::__value_type<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)> > >::__emplace_hint_unique_key_args<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)> const&>(std::__1::__tree_const_iterator<std::__1::__value_type<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)>, std::__1::__tree_node<std::__1::__value_type<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)>, void*>*, long>, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)> const&) (in ./avm)
+value_type<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)>, std::__1::__tree_node<std::__1::__value_type<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)>, void*>*, long>, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, std::__1::pair<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const, void (*)(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&)> const&) (in ./avm)
+==6815==    by 0x100030D5E: execute(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::__list_iterator<Token*, void*>, Error&, std::__1::list<Token*, std::__1::allocator<Token*> >) (in ./avm)
+==6815==    by 0x100030D5E: execute(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::__list_iterator<Token*, void*>, Error&, std::__1::list<Token*, std::__1::allocator<Token*> >) (in ./avm)
+==6815==    by 0x100031DCC: walkthrough(std::__1::list<Token*, std::__1::allocator<Token*> >, Error&) (in ./avm)
+==6815==    by 0x100031DCC: walkthrough(std::__1::list<Token*, std::__1::allocator<Token*> >, Error&) (in ./avm)
+==6815==    by 0x100001A01: main (in ./avm)
+==6815== 
+==6815==    by 0x100001A01: main (in ./avm)
+==6815== 
+==6815== 816 bytes in 17 blocks are still reachable in loss record 45 of 51
+==6815== 816 bytes in 17 blocks are still reachable in loss record 45 of 51
+==6815==    at 0x1000F7A46: malloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    at 0x1000F7A46: malloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x1001E2E0D: operator new(unsigned long) (in /usr/lib/libc++abi.dylib)
+==6815==    by 0x1001E2E0D: operator new(unsigned long) (in /usr/lib/libc++abi.dylib)
+==6815==    by 0x100007438: separate(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, int const&, std::__1::list<Token*, std::__1::allocator<Token*> >&, int*) (in ./avm)
+==6815==    by 0x100007438: separate(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, int const&, std::__1::list<Token*, std::__1::allocator<Token*> >&, int*) (in ./avm)
+==6815==    by 0x1000082FE: readFile(char*, std::__1::list<Token*, std::__1::allocator<Token*> >&) (in ./avm)
+==6815==    by 0x1000082FE: readFile(char*, std::__1::list<Token*, std::__1::allocator<Token*> >&) (in ./avm)
+==6815==    by 0x10000193E: main (in ./avm)
+==6815== 
+==6815==    by 0x10000193E: main (in ./avm)
+==6815== 
+==6815== 4,096 bytes in 1 blocks are still reachable in loss record 50 of 51
+==6815== 4,096 bytes in 1 blocks are still reachable in loss record 50 of 51
+==6815==    at 0x1000F7A46: malloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x1001E2E0D: operator new(unsigned long) (in /usr/lib/libc++abi.dylib)
+==6815==    at 0x1000F7A46: malloc (in /Users/acottier/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==6815==    by 0x1001E2E0D: operator new(unsigned long) (in /usr/lib/libc++abi.dylib)
+==6815==    by 0x100039EE2: std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> >::__add_back_capacity() (in ./avm)
+==6815==    by 0x100039EE2: std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> >::__add_back_capacity() (in ./avm)
+==6815==    by 0x100038627: std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> >::push_back(IOperand const*&&) (in ./avm)
+==6815==    by 0x100038627: std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> >::push_back(IOperand const*&&) (in ./avm)
+==6815==    by 0x10002E220: opPush(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&) (in ./avm)
+==6815==    by 0x10002E220: opPush(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, Error&) (in ./avm)
+==6815==    by 0x100031173: execute(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::__list_iterator<Token*, void*>, Error&, std::__1::list<Token*, std::__1::allocator<Token*> >) (in ./avm)
+==6815==    by 0x100031DCC: walkthrough(std::__1::list<Token*, std::__1::allocator<Token*> >, Error&) (in ./avm)
+==6815==    by 0x100031173: execute(std::__1::stack<IOperand const*, std::__1::deque<IOperand const*, std::__1::allocator<IOperand const*> > >&, std::__1::__list_iterator<Token*, void*>, Error&, std::__1::list<Token*, std::__1::allocator<Token*> >) (in ./avm)
+==6815==    by 0x100031DCC: walkthrough(std::__1::list<Token*, std::__1::allocator<Token*> >, Error&) (in ./avm)
+==6815==    by 0x100001A01: main (in ./avm)
+==6815== 
+==6815==    by 0x100001A01: main (in ./avm)
+==6815== 
+==6815== LEAK SUMMARY:
+==6815== LEAK SUMMARY:
+==6815==    definitely lost: 0 bytes in 0 blocks
+==6815==    indirectly lost: 0 bytes in 0 blocks
+==6815==      possibly lost: 72 bytes in 3 blocks
+==6815==    definitely lost: 0 bytes in 0 blocks
+==6815==    indirectly lost: 0 bytes in 0 blocks
+==6815==      possibly lost: 72 bytes in 3 blocks
+==6815==    still reachable: 7,128 bytes in 89 blocks
+==6815==         suppressed: 17,903 bytes in 154 blocks
+==6815==    still reachable: 7,128 bytes in 89 blocks
+==6815==         suppressed: 17,903 bytes in 154 blocks
+==6815== 
+==6815== For counts of detected and suppressed errors, rerun with: -v
+==6815== 
+==6815== For counts of detected and suppressed errors, rerun with: -v
+==6815== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 13 from 13)
+==6815== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 13 from 13)
