@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 14:13:14 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/10 14:26:43 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/13 16:54:48 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,7 @@ void		parse(std::list<Token *> input, Error & errMsg)
 
 	for (std::list<Token *>::iterator ii = input.begin() ; ii != input.end() && !exitStatus; ii++)
 	{
-		if ((*ii)->getLine() == lastErrorLine)
-			continue;
-		else
-			validLine = true;
+		validLine = true;
 		if ((*ii)->getInputType() == 0)
 		{
 			lastOp = (*ii);

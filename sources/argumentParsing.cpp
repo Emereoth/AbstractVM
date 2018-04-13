@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/03 12:30:33 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/13 13:51:49 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/13 16:46:45 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ std::string	extractValue(std::string const & src)
 
 bool		argRangeInt8(Token * src, Error & errMsg, std::list<Token *> input)
 {
-	int					res;
+	double				res;
 	std::stringstream	newMsg;
 
-	res = stoi(extractValue(src->getContent()));
+	res = stod(extractValue(src->getContent()));
 	if (res > CHAR_MAX)
 	{
 		newMsg << "Error on line " << src->getLine() << ": \"" << showFullContent(input, src->getLine())
@@ -49,10 +49,10 @@ bool		argRangeInt8(Token * src, Error & errMsg, std::list<Token *> input)
 
 bool		argRangeInt16(Token * src, Error & errMsg, std::list<Token *> input)
 {
-	int					res;
+	double				res;
 	std::stringstream	newMsg;
 
-	res = stoi(extractValue(src->getContent()));
+	res = stod(extractValue(src->getContent()));
 	if (res > SHRT_MAX)
 	{
 		newMsg << "Error on line " << src->getLine() << ": \"" << showFullContent(input, src->getLine())
@@ -72,10 +72,10 @@ bool		argRangeInt16(Token * src, Error & errMsg, std::list<Token *> input)
 
 bool		argRangeInt32(Token * src, Error & errMsg, std::list<Token *> input)
 {
-	int64_t				res;
+	double				res;
 	std::stringstream	newMsg;
 
-	res = stoi(extractValue(src->getContent()));
+	res = stod(extractValue(src->getContent()));
 	if (res > INT_MAX)
 	{
 		newMsg << "Error on line " << src->getLine() << ": \"" << showFullContent(input, src->getLine())
@@ -118,29 +118,10 @@ bool		argRangeFloat(Token * src, Error & errMsg, std::list<Token *> input)
 
 bool		argRangeDouble(Token * src, Error & errMsg, std::list<Token *> input)
 {
-	// double				res;
-	// std::stringstream	newMsg;
-
 	(void)src;
 	(void)errMsg;
 	(void)input;
 	return (true);
-	// res = stod(extractValue(src->getContent()));
-	// if (res > DBL_MAX)
-	// {
-	// 	newMsg << "Error on line " << src->getLine() << ": \"" << showFullContent(input, src->getLine())
-	// 		<< "\": double overflow (-1.79769e+308 < double < 1.79769e+308)";
-	// 	errMsg.addMsg(newMsg.str());
-	// 	return (false);
-	// }
-	// else if (res < -DBL_MAX)
-	// {
-	// 	newMsg << "Error on line " << src->getLine() << ": \"" << showFullContent(input, src->getLine())
-	// 		<< "\": double underflow (-1.79769e+308 < double < 1.79769e+308)";
-	// 	errMsg.addMsg(newMsg.str());
-	// 	return (false);
-	// }
-	// return (true);
 }
 
 bool		checkArgRange(Token * src, int range, Error & errMsg, std::list<Token *> input)

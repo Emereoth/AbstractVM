@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 16:14:38 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/13 15:36:46 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/13 16:36:53 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ std::string		showFullContent(std::list<Token *> list, int const & line)
 	return (res.str());
 }
 
+void			freeInput(std::list<Token *> input)
+{
+	for (std::list<Token *>::iterator ii = input.begin() ; ii != input.end() ; ii++)
+		delete (*ii);
+}
+
 int  		   main(int argc, char **argv)
 {
     std::list<Token *> 			input;
@@ -47,6 +53,7 @@ int  		   main(int argc, char **argv)
 		synCheck(input, errMsg);
 		parse(input, errMsg);
 		walkthrough(input, errMsg);
+		freeInput(input);
 	}
 	catch (Error errMsg)
 	{

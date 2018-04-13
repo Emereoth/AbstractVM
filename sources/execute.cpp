@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 16:01:18 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/13 14:13:29 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/13 16:38:33 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,7 +216,7 @@ void			execute(std::stack<IOperand const *> & stack, std::list<Token *>::iterato
 
 void			walkthrough(std::list<Token *> input, Error & errMsg)
 {
-	std::string				cmd;
+	std::string						cmd;
 	std::stack<IOperand const *>	stack;
 
 	for (std::list<Token *>::iterator ii = input.begin() ; ii != input.end() ; ii++ )
@@ -227,4 +227,10 @@ void			walkthrough(std::list<Token *> input, Error & errMsg)
 			execute(stack, ii, errMsg);
 		}
 	}
+	while (!stack.empty())
+	{
+		delete stack.top();
+		stack.pop();
+	}
+
 }
