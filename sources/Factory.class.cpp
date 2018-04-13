@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 14:52:52 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/07 13:39:44 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/13 15:36:40 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ IOperand const *	Factory::createOperand(std::string const & value, eOperandType 
 		{Float, &Factory::createFloat},
 		{Double, &Factory::createDouble}
 	};
+
 	return ((this->*(functionMap[type]))(value));
 }
 

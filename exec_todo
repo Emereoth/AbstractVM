@@ -1,3 +1,0 @@
-walk through tokens
-- catch first cmd (switch?)
-	- redirect to specific exec function (err handling)

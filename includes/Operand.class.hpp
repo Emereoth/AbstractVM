@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 18:15:23 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/12 18:20:30 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/13 15:35:05 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,19 @@ class Operand : public IOperand
 };
 
 template <typename T>
-Operand<T>::Operand(T value, eOperandType type) : _value(value), _type(type), _string(std::to_string(_value)) {}
+Operand<T>::Operand(T value, eOperandType type) : _value(value), _type(type), _string(std::to_string(_value))
+{
+	std::string		decPart;
+
+	if (_type == Float || _type == Double)
+	{
+		decPart = _string.substr(_string.find('.'));
+		if (!decPart.compare(".000000"))
+			_string = _string.erase(_string.find('.'), std::string::npos);
+		else if (_string.back() == '0')
+			_string = _string.erase(_string.find_last_not_of('0') + 1, std::string::npos);
+	}
+}
 
 template <typename T>
 Operand<T>::~Operand(void) {}

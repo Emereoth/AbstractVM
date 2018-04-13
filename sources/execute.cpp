@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 16:01:18 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/12 18:56:07 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/13 14:13:29 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,30 @@ void			doOp(std::stack<IOperand const *> &stack, eOperationType type, Error & er
 		switch (type)
 		{
 			case ADD:
+			{
 				stack.push(*v1 + *v2);
+				break;
+			}
 			case SUB:
+			{
 				stack.push(*v1 - *v2);
+				break;
+			}
 			case MUL:
+			{
 				stack.push(*v1 * *v2);
+				break;
+			}
 			case DIV:
+			{
 				stack.push(*v1 / *v2);
+				break;
+			}
 			case MOD:
+			{
 				stack.push(*v1 % *v2);
+				break;
+			}
 		}
 		delete v1;
 		delete v2;
@@ -166,7 +181,7 @@ void			opPrint(std::stack<IOperand const *> & stack, std::string const & arg, Er
 		errMsg.addMsg("Error: top value on stack is not in a printable format.");
 		throw errMsg;
 	}
-	std::cout << atoi(stack.top()->toString().c_str()) << std::endl;
+	std::cout << (char)atoi(stack.top()->toString().c_str()) << std::endl;
 }
 
 void			opExit(std::stack<IOperand const *> & stack, std::string const & arg, Error & errMsg) 
@@ -193,6 +208,7 @@ void			execute(std::stack<IOperand const *> & stack, std::list<Token *>::iterato
 		{"exit", &opExit}
 	};
 	std::list<Token *>::iterator	next = ii;
+	
 	if (!(*ii)->getContent().compare("push") || !(*ii)->getContent().compare("assert"))
 		next++;
 	functionMap[(*ii)->getContent()](stack, (*next)->getContent(), errMsg);
