@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 16:01:18 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/13 16:38:33 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/14 14:52:10 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,27 +37,27 @@ void			doOp(std::stack<IOperand const *> &stack, eOperationType type, Error & er
 		{
 			case ADD:
 			{
-				stack.push(*v1 + *v2);
+				stack.push(*v2 + *v1);
 				break;
 			}
 			case SUB:
 			{
-				stack.push(*v1 - *v2);
+				stack.push(*v2 - *v1);
 				break;
 			}
 			case MUL:
 			{
-				stack.push(*v1 * *v2);
+				stack.push(*v2 * *v1);
 				break;
 			}
 			case DIV:
 			{
-				stack.push(*v1 / *v2);
+				stack.push(*v2 / *v1);
 				break;
 			}
 			case MOD:
 			{
-				stack.push(*v1 % *v2);
+				stack.push(*v2 % *v1);
 				break;
 			}
 		}
@@ -225,6 +225,8 @@ void			walkthrough(std::list<Token *> input, Error & errMsg)
 		{
 			cmd = (*ii)->getContent();
 			execute(stack, ii, errMsg);
+			if	(!cmd.compare("exit"))
+				break; 
 		}
 	}
 	while (!stack.empty())

@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 14:52:52 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/13 15:36:40 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/14 15:39:08 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ IOperand const *	Factory::createInt32(std::string const & value) const
 
 IOperand const *	Factory::createFloat(std::string const & value) const
 {
+	std::cout << "initializing float with received value of " << value << std::endl;
 	float			castedValue = static_cast<float>(atof(value.c_str()));
 	IOperand const *	res = new Operand<float>(castedValue, eOperandType::Float);
 

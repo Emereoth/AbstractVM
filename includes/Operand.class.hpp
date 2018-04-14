@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 18:15:23 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/13 15:35:05 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/14 16:37:36 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ IOperand	const *	Operand<T>::operator/(IOperand const & rhs) const
 	std::stringstream	ss;
 	Error				err;
 
-	if (std::stod(rhs.toString()) == 0 && retType != Float && retType != Double)
+	if (std::stod(rhs.toString()) == 0)
 	{
 		err.addMsg("Error: Division by 0.");
 		throw err;
@@ -160,7 +160,7 @@ IOperand	const *	Operand<T>::operator%(IOperand const & rhs) const
 	std::stringstream	ss;
 	Error				err;
 
-	if (std::stod(rhs.toString()) == 0 && retType != Float && retType != Double)
+	if (std::stod(rhs.toString()) == 0)
 	{
 		err.addMsg("Error: Division by 0.");
 		throw err;
