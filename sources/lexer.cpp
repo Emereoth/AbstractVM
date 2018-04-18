@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 15:05:55 by acottier          #+#    #+#             */
-/*   Updated: 2018/03/26 16:07:29 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/18 16:51:05 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ void		synCheck(std::list<Token *> input, Error & errMsg)
 		currentLine = (*ii)->getLine();
 		if (elemsOnLine(ii, input.end(), (*ii)->getLine()) == -1)
 		{
-			newErr << "Error on line " << (*ii)->getLine() << ": \"" << showFullContent(input, (*ii)->getLine()) << "\" : too many elements (max 2)";
+			newErr << "Error on line " << (*ii)->getLine() << ": \"" << showFullContent(input, (*ii)->getLine()) << "\" : too many elements (max 2)\n";
 			errMsg.addMsg(newErr.str());
-			break;
+			// break;
 		}
 		while (ii != input.end() && (*ii)->getLine() == currentLine)
-			ii++;;
+			ii++;
 	}
 	if (!errMsg.isEmpty())
 		throw errMsg;

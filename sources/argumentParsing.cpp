@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/03 12:30:33 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/13 16:46:45 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/18 12:01:58 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,20 @@ std::string	extractValue(std::string const & src)
 
 bool		argRangeInt8(Token * src, Error & errMsg, std::list<Token *> input)
 {
-	double				res;
+	int					res;
 	std::stringstream	newMsg;
+	bool				outOfBounds = false;
 
-	res = stod(extractValue(src->getContent()));
-	if (res > CHAR_MAX)
-	{
-		newMsg << "Error on line " << src->getLine() << ": \"" << showFullContent(input, src->getLine())
+	newMsg << "Error on line " << src->getLine() << ": \"" << showFullContent(input, src->getLine())
 			<< "\": integer overflow (-128 < int_8 < 127)";
-		errMsg.addMsg(newMsg.str());
-		return (false);
+	try {
+		res = stoi(extractValue(src->getContent()));
 	}
-	else if (res < CHAR_MIN)
+	catch (std::out_of_range e){
+		outOfBounds = true;
+	}
+	if (res > CHAR_MAX || res < CHAR_MIN || outOfBounds)
 	{
-		newMsg << "Error on line " << src->getLine() << ": \"" << showFullContent(input, src->getLine())
-			<< "\": integer underflow (-128 < int_8 < 127)";
 		errMsg.addMsg(newMsg.str());
 		return (false);
 	}
@@ -51,19 +50,18 @@ bool		argRangeInt16(Token * src, Error & errMsg, std::list<Token *> input)
 {
 	double				res;
 	std::stringstream	newMsg;
+	bool				outOfBounds = false;
 
-	res = stod(extractValue(src->getContent()));
-	if (res > SHRT_MAX)
-	{
-		newMsg << "Error on line " << src->getLine() << ": \"" << showFullContent(input, src->getLine())
+	newMsg << "Error on line " << src->getLine() << ": \"" << showFullContent(input, src->getLine())
 			<< "\": integer overflow (-32768 < int_16 < 32767)";
-		errMsg.addMsg(newMsg.str());
-		return (false);
+	try {
+		res = stod(extractValue(src->getContent()));
 	}
-	else if (res < SHRT_MIN)
+	catch (std::out_of_range e) {
+		outOfBounds = true;
+	}
+	if (res > SHRT_MAX || res < SHRT_MIN || outOfBounds)
 	{
-		newMsg << "Error on line " << src->getLine() << ": \"" << showFullContent(input, src->getLine())
-			<< "\": integer underflow (-32768 < int_16 < 32767)";
 		errMsg.addMsg(newMsg.str());
 		return (false);
 	}
@@ -74,19 +72,18 @@ bool		argRangeInt32(Token * src, Error & errMsg, std::list<Token *> input)
 {
 	double				res;
 	std::stringstream	newMsg;
+	bool				outOfBounds = false;
 
-	res = stod(extractValue(src->getContent()));
-	if (res > INT_MAX)
-	{
-		newMsg << "Error on line " << src->getLine() << ": \"" << showFullContent(input, src->getLine())
+	newMsg << "Error on line " << src->getLine() << ": \"" << showFullContent(input, src->getLine())
 			<< "\": integer overflow (-2147483648 < int_32 < 2147483647)";
-		errMsg.addMsg(newMsg.str());
-		return (false);
+	try {
+		res = stod(extractValue(src->getContent()));
 	}
-	else if (res < INT_MIN)
+	catch (std::out_of_range e) {
+		outOfBounds = true;
+	}
+	if (res > INT_MAX || res < INT_MIN || outOfBounds)
 	{
-		newMsg << "Error on line " << src->getLine() << ": \"" << showFullContent(input, src->getLine())
-			<< "\": integer underflow (-2147483648 < int_32 < 2147483647)";
 		errMsg.addMsg(newMsg.str());
 		return (false);
 	}
@@ -126,7 +123,16 @@ bool		argRangeDouble(Token * src, Error & errMsg, std::list<Token *> input)
 
 bool		checkArgRange(Token * src, int range, Error & errMsg, std::list<Token *> input)
 {
+	std::stringstream		newMsg;
+
 	src->setRange(range);
+	if (range < FLOAT && extractValue(src->getContent()).find('.') != std::string::npos)
+	{
+		newMsg << "Error on line " << src->getLine() << ": \"" << showFullContent(input, src->getLine())
+			<< "\": decimal value in integer type";
+		errMsg.addMsg(newMsg.str());
+		return (false);
+	}
 	switch (range)
 	{
 		case INT_8:
