@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/03 12:30:33 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/21 17:06:00 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/21 17:21:49 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ bool		argRangeInt8(std::string const & content, int const line, Error & errMsg, 
 	catch (std::out_of_range e){
 		outOfBounds = true;
 	}
-	if (res > CHAR_MAX || res < CHAR_MIN || outOfBounds)
+	if (res > std::numeric_limits<int8_t>::max() || res < std::numeric_limits<int8_t>::lowest() || outOfBounds)
 	{
 		errMsg.addMsg(errorFormatter("integer overflow (-128 < int_8 < 127)", line, input));
 		return (false);
@@ -65,7 +65,7 @@ bool		argRangeInt16(std::string const & content, int const line, Error & errMsg,
 	catch (std::out_of_range e) {
 		outOfBounds = true;
 	}
-	if (res > SHRT_MAX || res < SHRT_MIN || outOfBounds)
+	if (res > std::numeric_limits<int16_t>::max() || res < std::numeric_limits<int16_t>::lowest() || outOfBounds)
 	{
 		errMsg.addMsg(errorFormatter("integer overflow (-32768 < int_16 < 32767)", line, input));
 		return (false);
@@ -87,7 +87,7 @@ bool		argRangeInt32(std::string const & content, int const line, Error & errMsg,
 	catch (std::out_of_range e) {
 		outOfBounds = true;
 	}
-	if (res > INT_MAX || res < INT_MIN || outOfBounds)
+	if (res > std::numeric_limits<int32_t>::max() || res < std::numeric_limits<int32_t>::lowest() || outOfBounds)
 	{
 		errMsg.addMsg(errorFormatter("integer overflow (-2147483648 < int_32 < 2147483647)", line, input));
 		return (false);
@@ -109,7 +109,7 @@ bool		argRangeFloat(std::string const & content, int const line, Error & errMsg,
 	catch (std::out_of_range e) {
 		outOfBounds = true;
 	}
-	if (res > FLT_MAX || res < FLT_MIN || outOfBounds)
+	if (res > std::numeric_limits<float>::max() || res < std::numeric_limits<float>::lowest() || outOfBounds)
 	{
 		errMsg.addMsg(errorFormatter("float overflow (1.8E-38 < float < 3.4E+38)", line, input));
 		return (false);
@@ -133,7 +133,7 @@ bool		argRangeDouble(std::string const & content, int const line, Error & errMsg
 	}
 	if (res > std::numeric_limits<double>::max() || res < std::numeric_limits<double>::lowest() || outOfBounds)
 	{
-		errMsg.addMsg(errorFormatter("float overflow (2.2E-308 < double < 1.8E+308)", line, input));
+		errMsg.addMsg(errorFormatter("double overflow (2.2E-308 < double < 1.8E+308)", line, input));
 		return (false);
 	}
 	return (true);
