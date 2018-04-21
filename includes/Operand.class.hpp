@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 18:15:23 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/14 16:37:36 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/21 17:11:44 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,6 @@
 #include "avm.hpp"
 #include <sstream>
 #include <math.h>
-
-enum class opType 
-{
-	ADD,
-	MUL,
-	DIV,
-	SUB,
-	MOD
-};
 
 template <typename T>
 class Operand : public IOperand
@@ -105,7 +96,7 @@ IOperand	const *	Operand<T>::operator+(IOperand const & rhs) const
 	Factory				factory;
 	std::stringstream	ss;
 
-	checkOpRange(retType, this->toString(), rhs.toString());
+	checkOpRange(retType, this->toString(), rhs.toString(), opType::ADD);
 	ss << _value + std::stod(rhs.toString());
 	return (factory.createOperand(ss.str(), retType));
 }
@@ -117,7 +108,7 @@ IOperand	const *	Operand<T>::operator-(IOperand const & rhs) const
 	Factory				factory;
 	std::stringstream	ss;
 
-	checkOpRange(retType, this->toString(), rhs.toString());
+	checkOpRange(retType, this->toString(), rhs.toString(), opType::SUB);
 	ss << _value - std::stod(rhs.toString());
 	return (factory.createOperand(ss.str(), retType));
 }
@@ -129,7 +120,7 @@ IOperand	const *	Operand<T>::operator*(IOperand const & rhs) const
 	Factory				factory;
 	std::stringstream	ss;
 
-	checkOpRange(retType, this->toString(), rhs.toString());
+	checkOpRange(retType, this->toString(), rhs.toString(), opType::MUL);
 	ss << _value * std::stod(rhs.toString());
 	return (factory.createOperand(ss.str(), retType));
 }
@@ -147,7 +138,7 @@ IOperand	const *	Operand<T>::operator/(IOperand const & rhs) const
 		err.addMsg("Error: Division by 0.");
 		throw err;
 	}
-	checkOpRange(retType, this->toString(), rhs.toString());
+	checkOpRange(retType, this->toString(), rhs.toString(), opType::DIV);
 	ss << _value / std::stod(rhs.toString());
 	return (factory.createOperand(ss.str(), retType));
 }
@@ -165,7 +156,7 @@ IOperand	const *	Operand<T>::operator%(IOperand const & rhs) const
 		err.addMsg("Error: Division by 0.");
 		throw err;
 	}
-	checkOpRange(retType, this->toString(), rhs.toString());
+	checkOpRange(retType, this->toString(), rhs.toString(), opType::MOD);
 	ss << fmod(std::stod(_string), std::stod(rhs.toString()));
 	return (factory.createOperand(ss.str(), retType));
 }

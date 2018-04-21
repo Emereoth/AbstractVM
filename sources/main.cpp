@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 16:14:38 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/13 16:36:53 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/20 14:08:04 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@
 /*
 ** Display full content of all elements on a certain line
 */
+
+std::string		errorFormatter(std::string const & message, int const line, std::list<Token *> input)
+{
+	std::stringstream	msg;
+
+	msg << "Error on line " << line << ": \"" << showFullContent(input, line) << "\" : " << message << std::endl;
+	return (msg.str());
+}
 
 std::string		showFullContent(std::list<Token *> list, int const & line)
 {
@@ -33,6 +41,9 @@ std::string		showFullContent(std::list<Token *> list, int const & line)
 	return (res.str());
 }
 
+/*
+*	Free input list
+*/
 void			freeInput(std::list<Token *> input)
 {
 	for (std::list<Token *>::iterator ii = input.begin() ; ii != input.end() ; ii++)

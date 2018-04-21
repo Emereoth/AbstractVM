@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 15:05:55 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/18 16:51:05 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/20 14:07:49 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,33 @@
 #include "../includes/avm.hpp"
 
 /*
-** Checks the number of elems on a line; returns an error code if there's more than 2
+** Checks the number of elements on a line; returns an error code if there's more than 2
 */
-int			elemsOnLine(std::list<Token *>::iterator ii, std::list<Token *>::iterator end, int const & line)
+void		elemsOnLine(int const line, std::list<Token *>	input, Error & errMsg)
 {
-	int				res = 0;
-	int				currentType = 0;
+	int								cmdNb = 0;
+	int								argNb = 0;
+	std::stringstream				newMsg;
+	std::list<Token *>::iterator	ii = input.begin();
 
-	while (ii != end && (*ii)->getLine() == line)
+	while (ii != input.end() && line != (*ii)->getLine())
+		ii++;
+	while (ii != input.end() && line == (*ii)->getLine())
 	{
-		if (currentType == 1)
-			return (-1);
-		currentType = (*ii)->getInputType();
-		res++;
+		if ((*ii)->getInputType() == INSTRUCTION)
+			cmdNb++;
+		else if ((*ii)->getInputType() == ARGUMENT)
+			argNb++;		
 		ii++;
 	}
-	return (res);
+	if (cmdNb > 1)
+		errMsg.addMsg(errorFormatter("too many instructions on line", line, input));
+	if (argNb > 1)
+		errMsg.addMsg(errorFormatter("too many arguments on line", line, input));
 }
 
 /*
-** Check syntax on all elems in input list
+** Check syntax on all elements in input list
 */
 void		synCheck(std::list<Token *> input, Error & errMsg)
 {
@@ -43,12 +50,7 @@ void		synCheck(std::list<Token *> input, Error & errMsg)
 	for (std::list<Token *>::iterator ii = input.begin() ; ii != input.end() ; )
 	{
 		currentLine = (*ii)->getLine();
-		if (elemsOnLine(ii, input.end(), (*ii)->getLine()) == -1)
-		{
-			newErr << "Error on line " << (*ii)->getLine() << ": \"" << showFullContent(input, (*ii)->getLine()) << "\" : too many elements (max 2)\n";
-			errMsg.addMsg(newErr.str());
-			// break;
-		}
+		elemsOnLine(currentLine, input, errMsg);
 		while (ii != input.end() && (*ii)->getLine() == currentLine)
 			ii++;
 	}

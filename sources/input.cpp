@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 14:59:51 by acottier          #+#    #+#             */
-/*   Updated: 2018/02/03 11:40:24 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/19 17:08:58 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,14 @@ void	readFile(char *file, std::list<Token *> & res)
     std::string         buffer;
 	int					pos;
     int                 i = 1;
+	Error				errMsg;
 
-    ifs.open(file);
+	ifs.open(file);
+	if (!ifs)
+	{
+		errMsg.addMsg("Error opening file.");
+		throw errMsg;
+	}
     while (getline(ifs, buffer))
     {
 		pos = 0;

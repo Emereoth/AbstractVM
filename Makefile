@@ -6,14 +6,14 @@
 #    By: acottier <acottier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/13 09:21:32 by acottier          #+#    #+#              #
-#    Updated: 2018/04/13 15:39:02 by acottier         ###   ########.fr        #
+#    Updated: 2018/04/19 16:30:22 by acottier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= avm
 
 CC			= clang++
-FLAGS		= -Wall -Wextra -Werror -std=c++11
+FLAGS		= -Wall -Wextra -Werror -std=c++11 -fsanitize=address
 
 SRC_PATH	= sources
 OBJ_PATH	= objects
@@ -24,7 +24,6 @@ SRC_NAMES	= 	main.cpp \
 				lexer.cpp \
 				parser.cpp \
 				argumentParsing.cpp \
-				operations.cpp \
 				Factory.class.cpp \
 				Error.class.cpp \
 				execute.cpp

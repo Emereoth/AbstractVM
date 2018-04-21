@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 14:44:57 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/10 10:17:32 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/21 17:09:53 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,19 @@
 #include "Token.class.hpp"
 #include "Error.class.hpp"
 
+enum class opType 
+{
+	ADD,
+	MUL,
+	DIV,
+	SUB,
+	MOD
+};
+
 /* MAIN.CPP */
 
 std::string		showFullContent(std::list<Token *> list, int const & line);
+std::string		errorFormatter(std::string const & message, int const line, std::list<Token *> input);
 
 /* INPUT.CPP */
 
@@ -41,7 +51,7 @@ void			parse(std::list<Token *> input, Error & errMsg);
 /* ARGUMENTPARSING.CPP */
 
 bool			checkArgRange(Token * src, int range, Error & errMsg, std::list<Token *> input);
-void			checkOpRange(eOperandType type, std::string const & v1, std::string const & v2);
+void			checkOpRange(eOperandType type, std::string const & v1, std::string const & v2, opType op);
 
 /* OPERATIONS.CPP */
 

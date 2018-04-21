@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 11:55:02 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/13 14:07:48 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/20 14:15:06 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 Token::Token(void) {}
 
-Token::Token(int const & line, std::string const & command, int *pos) : _line(line), _errors(-1)
+Token::Token(int const & line, std::string const & command, int *pos) : _line(line)
 {
 	std::string		tmp = command.substr(0, command.find(';'));
 	
@@ -39,37 +39,34 @@ Token &				Token::operator=(Token const & src)
 
 Token::~Token(void) {}
 
+/*
+*	Return token position in input
+*/
 int					Token::getLine(void) const
 {
 	return (_line);
 }
 
+/*
+*	Return token type (INSTRUCTION or ARGUMENT)
+*/
 int					Token::getInputType(void) const
 {
 	return (_type);
 }
 
+/*
+*	Return token text value
+*/
 std::string			Token::getContent(void) const
 {
 	return (_content);
 }
 
-int					Token::getErrors(void) const
-{
-	return (_errors);
-}
-
-void				Token::addError(int const & type)
-{
-	_errors = type;
-}
-
+/*
+*	Display token content + position
+*/
 void				Token::showContent(void) const
 {
 	std::cout << _content << " : " << _type << std::endl;
-}
-
-void				Token::setRange(int range)
-{
-	_range = range;
 }

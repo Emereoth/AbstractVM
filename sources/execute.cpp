@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 16:01:18 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/14 14:52:10 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/20 11:08:23 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ enum eOperationType
 	MOD
 };
 
+/*
+*	Pops two operands from the top of the stack and pushes the operation result
+*/
 void			doOp(std::stack<IOperand const *> &stack, eOperationType type, Error & errMsg)
 {
 	if (stack.size() > 1)
@@ -71,11 +74,17 @@ void			doOp(std::stack<IOperand const *> &stack, eOperationType type, Error & er
 	}
 }
 
+/*
+*	Returns the value from 'push' or 'assert' parameter
+*/
 std::string		getExecValue(std::string const & arg)
 {
 	return (arg.substr(arg.find('(') + 1, arg.find(')') - arg.find('(') - 1));
 }
 
+/*
+*	Returns the data type from 'push' or 'assert' parameter
+*/
 eOperandType	getExecType(std::string const & arg)
 {
 	std::map<std::string, eOperandType>	typeMap = 
@@ -89,6 +98,9 @@ eOperandType	getExecType(std::string const & arg)
 	return (typeMap[arg.substr(0, arg.find('('))]);
 }
 
+/*
+*	Adds new value on top of the stack
+*/
 void			opPush(std::stack<IOperand const *> & stack, std::string const & arg, Error & errMsg)
 {
 	(void)errMsg;
@@ -97,6 +109,9 @@ void			opPush(std::stack<IOperand const *> & stack, std::string const & arg, Err
 	stack.push(factory.createOperand(getExecValue(arg), getExecType(arg)));
 }
 
+/*
+*	Deletes top value on the stack
+*/
 void			opPop(std::stack<IOperand const *> & stack, std::string const & arg, Error & errMsg)
 {
 	(void)arg;
@@ -108,6 +123,9 @@ void			opPop(std::stack<IOperand const *> & stack, std::string const & arg, Erro
 	stack.pop();
 }
 
+/*
+*	Displays all of the values on the stack
+*/
 void			opDump(std::stack<IOperand const *> & stack, std::string const & arg, Error & errMsg)
 {
 	(void)arg;
@@ -121,6 +139,9 @@ void			opDump(std::stack<IOperand const *> & stack, std::string const & arg, Err
 	}
 }
 
+/*
+*	Checks if top value on stack is identical (in value AND type) to the one passed as parameter
+*/
 void 			opAssert(std::stack<IOperand const *> & stack, std::string const & arg, Error & errMsg)
 {
 	eOperandType	assertType = getExecType(arg);
@@ -129,10 +150,17 @@ void 			opAssert(std::stack<IOperand const *> & stack, std::string const & arg, 
 	if (stack.empty() || stack.top()->getType() != assertType || assertValue.compare(stack.top()->toString()) != 0)
 	{
 		errMsg.addMsg("Error: assert failed.");
+		if (!stack.empty() && stack.top()->getType() != assertType)
+			std::cout << "Incorrect type" << std::endl;
+		if (!stack.empty() && assertValue.compare(stack.top()->toString()) != 0)
+			std::cout << "Incorrect value" << std::endl;
 		throw errMsg;
 	}
 }
 
+/*
+*	Addition operation
+*/
 void			opAdd(std::stack<IOperand const *> & stack, std::string const & arg, Error & errMsg)
 {
 	(void)arg;
@@ -140,6 +168,9 @@ void			opAdd(std::stack<IOperand const *> & stack, std::string const & arg, Erro
 	doOp(stack, ADD, errMsg);
 }
 
+/*
+*	Substraction operation
+*/
 void			opSub(std::stack<IOperand const *> & stack, std::string const & arg, Error & errMsg)
 {
 	(void)arg;
@@ -147,6 +178,9 @@ void			opSub(std::stack<IOperand const *> & stack, std::string const & arg, Erro
 	doOp(stack, SUB, errMsg);
 }
 
+/*
+*	Multiplication operation
+*/
 void			opMul(std::stack<IOperand const *> & stack, std::string const & arg, Error & errMsg)
 {
 	(void)arg;
@@ -154,6 +188,9 @@ void			opMul(std::stack<IOperand const *> & stack, std::string const & arg, Erro
 	doOp(stack, MUL, errMsg);
 }
 
+/*
+*	Division operation
+*/
 void			opDiv(std::stack<IOperand const *> & stack, std::string const & arg, Error & errMsg)
 {
 	(void)arg;
@@ -161,6 +198,9 @@ void			opDiv(std::stack<IOperand const *> & stack, std::string const & arg, Erro
 	doOp(stack, DIV, errMsg);
 }
 
+/*
+*	Modulo operation
+*/
 void			opMod(std::stack<IOperand const *> & stack, std::string const & arg, Error & errMsg)
 {
 	(void)arg;
@@ -168,6 +208,9 @@ void			opMod(std::stack<IOperand const *> & stack, std::string const & arg, Erro
 	doOp(stack, MOD, errMsg);
 }
 
+/*
+*	Asserts top value on stack is of type Int8 an then prints its corresponding ASCII character
+*/
 void			opPrint(std::stack<IOperand const *> & stack, std::string const & arg, Error & errMsg)
 {
 	(void)arg;
@@ -184,6 +227,9 @@ void			opPrint(std::stack<IOperand const *> & stack, std::string const & arg, Er
 	std::cout << (char)atoi(stack.top()->toString().c_str()) << std::endl;
 }
 
+/*
+*	Does nothing, the exit condition relative to this command is handled in walkthrough()
+*/
 void			opExit(std::stack<IOperand const *> & stack, std::string const & arg, Error & errMsg) 
 {
 	(void)stack;
@@ -191,6 +237,9 @@ void			opExit(std::stack<IOperand const *> & stack, std::string const & arg, Err
 	(void)errMsg;
 }
 
+/*
+*	Calls appropriate command function
+*/
 void			execute(std::stack<IOperand const *> & stack, std::list<Token *>::iterator ii, Error & errMsg)
 {
 	std::map<std::string const , void (*) (std::stack<IOperand const *> &, std::string const &, Error &)> functionMap = 
@@ -214,6 +263,9 @@ void			execute(std::stack<IOperand const *> & stack, std::list<Token *>::iterato
 	functionMap[(*ii)->getContent()](stack, (*next)->getContent(), errMsg);
 }
 
+/*
+*	Advances through instruction list
+*/
 void			walkthrough(std::list<Token *> input, Error & errMsg)
 {
 	std::string						cmd;

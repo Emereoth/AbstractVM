@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/03 12:30:33 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/18 12:01:58 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/21 17:06:00 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,13 @@
 #include <float.h>
 #include <sstream>
 #include <map>
+#include <limits.h>
 #include "../includes/avm.hpp"
+#include "../includes/Operand.class.hpp"
 
+/*
+*	Takes a 'push' or 'assert' argument as input, returns the value between the parenthesis
+*/
 std::string	extractValue(std::string const & src)
 {
 	int			startLen = src.find('(');
@@ -24,150 +29,236 @@ std::string	extractValue(std::string const & src)
 	return (src.substr(startLen + 1, endLen - startLen - 1));
 }
 
-bool		argRangeInt8(Token * src, Error & errMsg, std::list<Token *> input)
+/*
+*	Checks if given value falls into int8 range
+*/
+bool		argRangeInt8(std::string const & content, int const line, Error & errMsg, std::list<Token *> input)
 {
 	int					res;
-	std::stringstream	newMsg;
 	bool				outOfBounds = false;
 
-	newMsg << "Error on line " << src->getLine() << ": \"" << showFullContent(input, src->getLine())
-			<< "\": integer overflow (-128 < int_8 < 127)";
 	try {
-		res = stoi(extractValue(src->getContent()));
+		res = stoi(extractValue(content));
 	}
 	catch (std::out_of_range e){
 		outOfBounds = true;
 	}
 	if (res > CHAR_MAX || res < CHAR_MIN || outOfBounds)
 	{
-		errMsg.addMsg(newMsg.str());
+		errMsg.addMsg(errorFormatter("integer overflow (-128 < int_8 < 127)", line, input));
 		return (false);
 	}
 	return (true);
 }
 
-bool		argRangeInt16(Token * src, Error & errMsg, std::list<Token *> input)
+/*
+*	Checks if given value falls into int16 range
+*/
+bool		argRangeInt16(std::string const & content, int const line, Error & errMsg, std::list<Token *> input)
 {
-	double				res;
-	std::stringstream	newMsg;
+	int					res;
 	bool				outOfBounds = false;
 
-	newMsg << "Error on line " << src->getLine() << ": \"" << showFullContent(input, src->getLine())
-			<< "\": integer overflow (-32768 < int_16 < 32767)";
 	try {
-		res = stod(extractValue(src->getContent()));
+		res = stoi(extractValue(content));
 	}
 	catch (std::out_of_range e) {
 		outOfBounds = true;
 	}
 	if (res > SHRT_MAX || res < SHRT_MIN || outOfBounds)
 	{
-		errMsg.addMsg(newMsg.str());
+		errMsg.addMsg(errorFormatter("integer overflow (-32768 < int_16 < 32767)", line, input));
 		return (false);
 	}
 	return (true);
 }
 
-bool		argRangeInt32(Token * src, Error & errMsg, std::list<Token *> input)
+/*
+*	Checks if given value falls into int32 range
+*/
+bool		argRangeInt32(std::string const & content, int const line, Error & errMsg, std::list<Token *> input)
 {
-	double				res;
-	std::stringstream	newMsg;
+	int					res;
 	bool				outOfBounds = false;
 
-	newMsg << "Error on line " << src->getLine() << ": \"" << showFullContent(input, src->getLine())
-			<< "\": integer overflow (-2147483648 < int_32 < 2147483647)";
 	try {
-		res = stod(extractValue(src->getContent()));
+		res = stoi(extractValue(content));
 	}
 	catch (std::out_of_range e) {
 		outOfBounds = true;
 	}
 	if (res > INT_MAX || res < INT_MIN || outOfBounds)
 	{
-		errMsg.addMsg(newMsg.str());
+		errMsg.addMsg(errorFormatter("integer overflow (-2147483648 < int_32 < 2147483647)", line, input));
 		return (false);
 	}
 	return (true);
 }
 
-bool		argRangeFloat(Token * src, Error & errMsg, std::list<Token *> input)
+/*
+*	Checks if given value falls into float range
+*/
+bool		argRangeFloat(std::string const & content, int const line, Error & errMsg, std::list<Token *> input)
+{
+	float				res;
+	bool				outOfBounds = false;
+
+	try {
+		res = stof(extractValue(content));
+	}
+	catch (std::out_of_range e) {
+		outOfBounds = true;
+	}
+	if (res > FLT_MAX || res < FLT_MIN || outOfBounds)
+	{
+		errMsg.addMsg(errorFormatter("float overflow (1.8E-38 < float < 3.4E+38)", line, input));
+		return (false);
+	}
+	return (true);
+}
+
+/*
+*	Checks if given value falls into double range
+*/
+bool		argRangeDouble(std::string const & content, int const line, Error & errMsg, std::list<Token *> input)
 {
 	double				res;
-	std::stringstream	newMsg;
+	bool				outOfBounds = false;
 
-	res = stod(extractValue(src->getContent()));
-	if (res > FLT_MAX)
-	{
-		newMsg << "Error on line " << src->getLine() << ": \"" << showFullContent(input, src->getLine())
-			<< "\": float overflow (-3.40282e+38 < float < 3.40282e+38)";
-		errMsg.addMsg(newMsg.str());
-		return (false);
+	try {
+		res = stod(extractValue(content));
 	}
-	else if (res < -FLT_MAX)
+	catch (std::out_of_range e) {
+		outOfBounds = true;
+	}
+	if (res > std::numeric_limits<double>::max() || res < std::numeric_limits<double>::lowest() || outOfBounds)
 	{
-		newMsg << "Error on line " << src->getLine() << ": \"" << showFullContent(input, src->getLine())
-			<< "\": float underflow (-3.40282e+38 < float < 3.40282e+38)";
-		errMsg.addMsg(newMsg.str());
+		errMsg.addMsg(errorFormatter("float overflow (2.2E-308 < double < 1.8E+308)", line, input));
 		return (false);
 	}
 	return (true);
 }
 
-bool		argRangeDouble(Token * src, Error & errMsg, std::list<Token *> input)
-{
-	(void)src;
-	(void)errMsg;
-	(void)input;
-	return (true);
-}
-
+/*
+*	Calls overflow and type verification function for all data types
+*/
 bool		checkArgRange(Token * src, int range, Error & errMsg, std::list<Token *> input)
 {
-	std::stringstream		newMsg;
-
-	src->setRange(range);
 	if (range < FLOAT && extractValue(src->getContent()).find('.') != std::string::npos)
 	{
-		newMsg << "Error on line " << src->getLine() << ": \"" << showFullContent(input, src->getLine())
-			<< "\": decimal value in integer type";
-		errMsg.addMsg(newMsg.str());
+		errMsg.addMsg(errorFormatter("decimal value in integer type", src->getLine(), input));
 		return (false);
 	}
 	switch (range)
 	{
 		case INT_8:
-			return (argRangeInt8(src,errMsg, input));
+			return (argRangeInt8(src->getContent(), src->getLine(), errMsg, input));
 		case INT_16:
-			return (argRangeInt16(src,errMsg, input));
+			return (argRangeInt16(src->getContent(), src->getLine(), errMsg, input));
 		case INT_32:
-			return (argRangeInt32(src,errMsg, input));
+			return (argRangeInt32(src->getContent(), src->getLine(), errMsg, input));
 		case FLOAT:
-			return (argRangeFloat(src,errMsg, input));
+			return (argRangeFloat(src->getContent(), src->getLine(), errMsg, input));
 		case DOUBLE:
-			return (argRangeDouble(src,errMsg, input));
+			return (argRangeDouble(src->getContent(), src->getLine(), errMsg, input));
 	}
 	errMsg.addMsg("Unexpected error. This shouldn't happen, like, ever.");
 	throw errMsg;
 	return (false);
 }
 
-void		checkOpRange(eOperandType type, std::string const & v1, std::string const & v2)
+/*
+*	Is called from checkOpRange(), checks if operation result fits in expected result type
+*/
+void		checkResLimits(double const res, eOperandType type, Error * errMsg)
 {
-	Error							err;
-	std::map<eOperandType, double> limitMap = 
-	{
-		{Int8, CHAR_MAX},
-		{Int16, SHRT_MAX},
-		{Int32, INT_MAX},
-		{Float, FLT_MAX}
-	};
-	bool							isFloating = (type == Float || type == Double ? true : false);
-	double							res = (isFloating ? stod(v1) + stod(v2) : std::atoi(v1.c_str()) + std::atoi(v2.c_str()));
+	double		max;
+	double		min;
 
-	if (res > limitMap[type])
-		err.addMsg("Error: Overflow.");
-	if (res < -(limitMap[type]))
-		err.addMsg("Error: Underflow.");
-	if (!err.isEmpty())
-		throw err;
+	switch (type)
+	{
+		case Int8:
+		{
+			max = static_cast<double>(std::numeric_limits<int8_t>::max());
+			min = static_cast<double>(std::numeric_limits<int8_t>::lowest());
+			break ;
+		}
+		case Int16:
+		{
+			max = static_cast<double>(std::numeric_limits<int16_t>::max());
+			min = static_cast<double>(std::numeric_limits<int16_t>::lowest());
+			break ;
+		}
+		case Int32:
+		{
+			max = static_cast<double>(std::numeric_limits<int32_t>::max());
+			min = static_cast<double>(std::numeric_limits<int32_t>::lowest());
+			break ;
+		}
+		case Float:
+		{
+			max = static_cast<double>(std::numeric_limits<float>::max());
+			min = static_cast<double>(std::numeric_limits<float>::lowest());
+			break ;
+		}
+		case Double:
+		{
+			max = static_cast<double>(std::numeric_limits<double>::max());
+			min = static_cast<double>(std::numeric_limits<double>::lowest());
+			break ;
+		}
+	}
+	if (res > max || res < min)
+		(*errMsg).addMsg("Operation overflow");
+}
+
+/*
+*	Is called right before an operation. Computes operation result in double and checks if result is compatible with result type
+*/
+void		checkOpRange(eOperandType type, std::string const & v1, std::string const & v2, opType op)
+{
+	Error		errMsg;
+	double		res;
+	int			intRes;
+
+	try {
+		double op1 = stod(extractValue(v1));
+		double op2 = stod(extractValue(v2));
+		switch (op)
+		{
+			case opType::ADD:
+			{
+				res = op1 + op2;
+				break;
+			}
+			case opType::MUL:
+			{
+				res = op1 * op2;
+				break;
+			}
+			case opType::DIV:
+			{
+				res = op1 / op2;
+				break;
+			}
+			case opType::SUB:
+			{
+				res = op1 - op2;
+				break;
+			}
+			case opType::MOD:
+			{
+				intRes = static_cast<int>(op1) % static_cast<int>(op2);
+				break;
+			}
+			checkResLimits(res, type, &errMsg);
+			if (!errMsg.isEmpty())
+				throw errMsg;
+		}
+	}
+	catch (std::out_of_range e)
+	{
+		errMsg.addMsg("Operation overflow.");
+		throw errMsg;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 16:37:26 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/09 18:14:00 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/20 14:12:09 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,13 @@ class Token
         int							getLine(void) const;
         int							getInputType(void) const;
         std::string					getContent(void) const;
-        int							getErrors(void) const;
-        void						addError(int const & type);
         void						showContent(void) const;
 		std::string					showFullLine(std::list<Token *>::iterator ii, std::list<Token *> list) const;
-		void						setRange(int range);
 
     private:
         int                         _type;
-		int							_range;
         int                         _line;
         std::string					_content;
-        int							_errors;
 };
 
 #endif
