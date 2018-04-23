@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/03 12:30:33 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/21 17:21:49 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/23 11:08:29 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,8 +218,8 @@ void		checkResLimits(double const res, eOperandType type, Error * errMsg)
 void		checkOpRange(eOperandType type, std::string const & v1, std::string const & v2, opType op)
 {
 	Error		errMsg;
-	double		res;
-	int			intRes;
+	double		res = 0;
+	int			intRes = -1;
 
 	try {
 		double op1 = stod(extractValue(v1));
@@ -251,10 +251,10 @@ void		checkOpRange(eOperandType type, std::string const & v1, std::string const 
 				intRes = static_cast<int>(op1) % static_cast<int>(op2);
 				break;
 			}
-			checkResLimits(res, type, &errMsg);
-			if (!errMsg.isEmpty())
-				throw errMsg;
 		}
+		checkResLimits((intRes != -1 ? intRes : res), type, &errMsg);
+		if (!errMsg.isEmpty())
+			throw errMsg;
 	}
 	catch (std::out_of_range e)
 	{

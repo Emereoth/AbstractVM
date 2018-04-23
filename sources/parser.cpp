@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 14:13:14 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/20 14:01:07 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/23 11:08:18 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void		parse(std::list<Token *> input, Error & errMsg)
 				exitStatus = true;
 				ii++;
 				if (ii != input.end() && (*ii)->getContent().compare(";;"))
-					std::cout << "Warning: some commands are placed after the \'exit\' instruction and won't be parsed nor executed." << std::endl;
+					std::cout << "Warning: some commands are placed after the \'exit\' instruction and won't be parsed nor executed.\n" << std::endl;
 			}
 		}
 		else if ((*ii)->getInputType() == 1)
