@@ -6,14 +6,14 @@
 #    By: acottier <acottier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/13 09:21:32 by acottier          #+#    #+#              #
-#    Updated: 2018/04/19 16:30:22 by acottier         ###   ########.fr        #
+#    Updated: 2018/04/24 14:38:15 by acottier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= avm
 
 CC			= clang++
-FLAGS		= -Wall -Wextra -Werror -std=c++11 -fsanitize=address
+FLAGS		= -Wall -Wextra -Werror -std=c++11 #-fsanitize=address
 
 SRC_PATH	= sources
 OBJ_PATH	= objects

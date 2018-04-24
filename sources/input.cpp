@@ -6,24 +6,26 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 14:59:51 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/19 17:08:58 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/24 14:44:56 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fstream>
+#include <algorithm>
 #include "../includes/avm.hpp"
 #include "../includes/Token.class.hpp"
 
 /*
 ** Tokenize input text: separate based on spaces and newlines, ignore everything after a ';' and before a newline
 */
-void	separate(std::string const & buffer, int const & i, std::list<Token *> & res, int *pos)
+void	separate(std::string & buffer, int const & i, std::list<Token *> & res, int *pos)
 {
 	std::string		word;
 
-	for (size_t length = 0 ; length < buffer.length() ;)
+	std::replace(buffer.begin(), buffer.end(), '\t', ' ');
+	for (size_t length = 0 ; length < buffer.length() ; )
 	{
-		if (buffer[length] != ' ')
+		if (buffer[length] != ' ' && buffer[length] != '\t')
 		{
 			word = buffer.substr(length, buffer.find(' ', length) - length);
 			if (word.find(';', 0) != std::string::npos)

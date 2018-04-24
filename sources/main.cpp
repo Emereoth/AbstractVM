@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 16:14:38 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/20 14:08:04 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/24 14:43:54 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int  		   main(int argc, char **argv)
 	catch (Error errMsg)
 	{
 		std::cout << "\n" << errMsg.getMsg();
+		freeInput(input);
 		return (1);
 	}
     return (0);

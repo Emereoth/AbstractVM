@@ -6,7 +6,7 @@
 /*   By: acottier <acottier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 16:01:18 by acottier          #+#    #+#             */
-/*   Updated: 2018/04/20 11:08:23 by acottier         ###   ########.fr       */
+/*   Updated: 2018/04/24 14:36:11 by acottier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void			doOp(std::stack<IOperand const *> &stack, eOperationType type, Error & er
 	}
 	else
 	{
-		errMsg.addMsg("Error: couldn't find enough operands.");
+		errMsg.addMsg("Error: couldn't find enough operands for asked operation.");
 		throw errMsg;
 	}
 }
